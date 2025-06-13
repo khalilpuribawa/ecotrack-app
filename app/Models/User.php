@@ -45,11 +45,7 @@ class User extends Authenticatable
         return $this->hasMany(GreenPoint::class, 'added_by');
     }
     
-    // Satu user memiliki satu data poin
-    public function points()
-    {
-        return $this->hasOne(UserPoint::class);
-    }
+    
     
     // Relasi many-to-many ke Challenges melalui tabel challenge_participants
     public function challenges()
@@ -66,4 +62,12 @@ class User extends Authenticatable
                     ->withPivot('role')
                     ->withTimestamps();
     }
+    // File: app/Models/User.php
+
+// Pastikan relasi ke UserPoint ada
+public function userPoint()
+{
+    return $this->hasOne(UserPoint::class);
+}
+
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- Ganti 'layouts.app' dengan nama file layout utama Anda --}}
+@extends('admin.layouts.app') {{-- Ganti 'layouts.app' dengan nama file layout utama Anda --}}
 
 @section('title', 'Detail Laporan Lingkungan')
 

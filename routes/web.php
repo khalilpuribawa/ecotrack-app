@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/challenges', [ChallengeController::class, 'index'])->name('challenges.index');
     Route::get('/challenges/{challenge}', [ChallengeController::class, 'show'])->name('challenges.show');
     Route::post('/challenges/{challenge}/participate', [ChallengeController::class, 'participate'])->name('challenges.participate');
+    Route::post('/challenges/{challenge}/submit', [ChallengeController::class, 'submitProof'])->name('challenges.submitProof');
     
     // --- Fitur 3: Peta Hijau Komunitas ---
     Route::get('/green-map', [GreenPointController::class, 'index'])->name('green-map.index');
@@ -102,7 +103,7 @@ Route::middleware(['auth', \App\Http\Middleware\CheckIfAdmin::class])
 
     // Manajemen Laporan
     Route::get('/reports', [AdminReportController::class, 'index'])->name('reports.index');
-    Route::get('/reports/{report}', [ReportController::class, 'show'])->name('admin.reports.show');
+    Route::get('/reports/{report}', [ReportController::class, 'show'])->name('reports.show');
     Route::post('/reports/{report}/update-status', [AdminReportController::class, 'updateStatus'])->name('reports.updateStatus');
     Route::delete('/reports/{report}', [AdminReportController::class, 'destroy'])->name('reports.destroy');
 
@@ -115,7 +116,13 @@ Route::middleware(['auth', \App\Http\Middleware\CheckIfAdmin::class])
     Route::resource('articles', AdminArticleController::class)->except(['show']);
     
     // Manajemen Tantangan (CRUD Penuh)
-    Route::resource('challenges', AdminChallengeController::class)->except(['show']);
+    // ... di dalam grup admin ...
+Route::resource('challenges', AdminChallengeController::class)->except(['show']);
+
+// Rute untuk review dan approval
+Route::get('/challenges/{challenge}/review', [AdminChallengeController::class, 'reviewSubmissions'])->name('challenges.review');
+Route::post('/challenges/{challenge}/submissions/{user}/approve', [AdminChallengeController::class, 'approveSubmission'])->name('challenges.submissions.approve');
+Route::post('/challenges/{challenge}/submissions/{user}/reject', [AdminChallengeController::class, 'rejectSubmission'])->name('challenges.submissions.reject');
     
     // Manajemen Pengguna
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');

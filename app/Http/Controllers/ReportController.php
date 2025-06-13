@@ -52,6 +52,6 @@ class ReportController extends Controller
     // Menampilkan detail satu laporan
     public function show(Report $report)
     {
-        return view('reports.show', compact('report'));
+        return view('admin.reports.show', compact('report'));
     }
 }

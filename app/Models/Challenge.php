@@ -13,8 +13,13 @@ class Challenge extends Model
         'title', 'description', 'start_date', 'end_date', 'point_reward', 'badge',
     ];
 
+     protected $casts = [
+        'start_date' => 'datetime',
+        'end_date'   => 'datetime',
+    ];
+
     // Relasi many-to-many ke User melalui tabel challenge_participants
-    public function participants()
+    public function user()
     {
         return $this->belongsToMany(User::class, 'challenge_participants')
                     ->withPivot('status', 'submitted_proof')

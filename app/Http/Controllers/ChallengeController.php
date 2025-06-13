@@ -46,4 +46,30 @@ class ChallengeController extends Controller
 
         return redirect()->route('challenges.show', $challenge)->with('success', 'Anda berhasil bergabung dengan tantangan!');
     }
+
+     public function submitProof(Request $request, Challenge $challenge)
+    {
+        $request->validate([
+            // Validasi file: harus gambar, tipe tertentu, ukuran maks 2MB
+            'proof_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
+
+        $user = Auth::user();
+
+        // 1. Simpan foto ke server di dalam folder 'public/proofs/challenges'
+        // 'public' di sini merujuk ke storage disk.
+        $path = $request->file('proof_image')->store('proofs/challenges', 'public');
+        
+        // Pastikan Anda sudah menjalankan `php artisan storage:link` sebelumnya
+
+        // 2. Update data di pivot table (challenge_participants)
+        $user->challenges()->updateExistingPivot($challenge->id, [
+            'status' => 'submitted', // Ubah status menjadi 'submitted'
+            'submitted_proof' => $path,
+            'submitted_at' => now(),
+        ]);
+
+        return redirect()->route('challenges.show', $challenge)
+                         ->with('success', 'Bukti berhasil disubmit! Mohon tunggu review dari admin.');
+    }
 }

@@ -10,7 +10,7 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'category', 'description', 'latitude', 'longitude', 'image', 'status',
+        'user_id', 'category', 'description', 'latitude', 'longitude', 'image', 'status'
     ];
 
     // Setiap laporan dimiliki oleh satu user

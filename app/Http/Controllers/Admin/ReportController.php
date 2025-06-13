@@ -62,7 +62,7 @@ class ReportController extends Controller
     {
         // Mengirimkan data laporan ke view 'admin.reports.show'.
         // Pastikan Anda memiliki file resources/views/admin/reports/show.blade.php
-        return view('reports.show', compact('report'));
+        return view('admin.reports.show', compact('report'));
     }
     /**
      * Menghapus laporan.

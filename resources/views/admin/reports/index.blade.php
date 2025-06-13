@@ -42,7 +42,7 @@
                                 Aksi
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('reports.show', $report) }}"
+                                <li><a class="dropdown-item" href="{{ route('admin.reports.show', $report) }}"
                                         target="_blank">Lihat Detail</a></li>
                                 @if($report->status == 'pending')
                                 <li>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('avatar')->nullable();
             $table->rememberToken();
+            $table->integer('points')->default(0);
             $table->timestamps();
         });
     }
