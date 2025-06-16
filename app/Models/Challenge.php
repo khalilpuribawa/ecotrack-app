@@ -19,7 +19,7 @@ class Challenge extends Model
     ];
 
     // Relasi many-to-many ke User melalui tabel challenge_participants
-    public function user()
+    public function participants()
     {
         return $this->belongsToMany(User::class, 'challenge_participants')
                     ->withPivot('status', 'submitted_proof')

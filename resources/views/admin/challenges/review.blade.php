@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- Sesuaikan layout admin Anda --}}
+@extends('admin.layouts.app') {{-- Sesuaikan layout admin Anda --}}
 @section('title', 'Review Submissions')
 
 @section('content')

@@ -2,74 +2,77 @@
 
 namespace App\Http\Controllers;
 
+// Kumpulan semua 'use' yang dibutuhkan, tanpa duplikat.
 use App\Models\Challenge;
-use App\Models\UserPoint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ChallengeController extends Controller
 {
-    // Menampilkan daftar semua tantangan
+    /**
+     * Menampilkan daftar semua tantangan yang tersedia untuk pengguna.
+     */
     public function index()
     {
         $challenges = Challenge::latest()->paginate(10);
         return view('challenges.index', compact('challenges'));
     }
 
-    // Menampilkan detail tantangan dan status partisipasi user
+    /**
+     * Menampilkan detail satu tantangan dan status partisipasi pengguna saat ini.
+     */
     public function show(Challenge $challenge)
     {
         $user = Auth::user();
+        // Cek status partisipasi pengguna pada tantangan ini
         $participation = $user->challenges()->where('challenge_id', $challenge->id)->first();
+        
         return view('challenges.show', compact('challenge', 'participation'));
     }
     
-    // Logika untuk user ikut tantangan
+    /**
+     * Mendaftarkan pengguna untuk mengikuti sebuah tantangan.
+     */
     public function participate(Request $request, Challenge $challenge)
     {
         $user = Auth::user();
 
-        // Cek jika user sudah ikut
+        // Cek jika pengguna sudah pernah ikut tantangan ini sebelumnya
         if ($user->challenges()->where('challenge_id', $challenge->id)->exists()) {
             return back()->with('error', 'Anda sudah mengikuti tantangan ini.');
         }
 
-        // Tambahkan user ke tantangan
+        // Daftarkan pengguna ke tantangan dengan status 'joined'
         $user->challenges()->attach($challenge->id, ['status' => 'joined']);
         
-        // Contoh logika sederhana saat user menyelesaikan challenge
-        // Di aplikasi nyata, ini butuh verifikasi (misal upload bukti)
-        // Setelah verifikasi, status diubah menjadi 'completed' dan poin ditambah.
-        // Misalnya, ada fitur 'Selesaikan Tantangan':
-        // $user->challenges()->updateExistingPivot($challenge->id, ['status' => 'completed']);
-        // $user->points()->increment('total_points', $challenge->point_reward);
-
         return redirect()->route('challenges.show', $challenge)->with('success', 'Anda berhasil bergabung dengan tantangan!');
     }
 
-     public function submitProof(Request $request, Challenge $challenge)
+    /**
+     * Menerima dan memproses bukti yang di-submit oleh pengguna.
+     */
+    public function submitProof(Request $request, Challenge $challenge)
     {
+        // 1. Validasi input: pastikan yang di-upload adalah gambar.
         $request->validate([
-            // Validasi file: harus gambar, tipe tertentu, ukuran maks 2MB
             'proof_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
 
+        // 2. Dapatkan pengguna yang sedang login.
         $user = Auth::user();
 
-        // 1. Simpan foto ke server di dalam folder 'public/proofs/challenges'
-        // 'public' di sini merujuk ke storage disk.
-        $path = $request->file('proof_image')->store('proofs/challenges', 'public');
-        
-        // Pastikan Anda sudah menjalankan `php artisan storage:link` sebelumnya
+        // 3. Simpan file yang di-upload ke 'storage/app/public/proofs'.
+        $path = $request->file('proof_image')->store('proofs', 'public');
 
-        // 2. Update data di pivot table (challenge_participants)
+        // 4. Update data di tabel pivot (challenge_participants).
         $user->challenges()->updateExistingPivot($challenge->id, [
-            'status' => 'submitted', // Ubah status menjadi 'submitted'
-            'submitted_proof' => $path,
-            'submitted_at' => now(),
+            'status' => 'submitted',
+            'submitted_proof' => $path, // Simpan path file yang sudah di-upload
+            'submitted_at' => now(),    // Catat waktu submit
         ]);
 
-        return redirect()->route('challenges.show', $challenge)
-                         ->with('success', 'Bukti berhasil disubmit! Mohon tunggu review dari admin.');
+        // 5. Arahkan kembali pengguna dengan pesan sukses.
+        return back()->with('success', 'Bukti berhasil di-submit! Mohon tunggu review dari admin.');
     }
-}
+
+} // <- Ini adalah penutup dari 'class ChallengeController'
