@@ -7,7 +7,7 @@
     <div class="container-fluid py-5">
         {{-- BENAR --}}
         <h1>Selamat Datang, {{ $user->name }}!</h1>
-        <p>Poin Anda saat ini: <strong>{{ $points  }}</strong>. Teruslah berkontribusi untuk bumi yang lebih
+        <p>Poin Anda saat ini: <strong>{{ $user->points }}</strong>. Teruslah berkontribusi untuk bumi yang lebih
             baik.</p>
         <a href="{{ route('reports.create') }}" class="btn btn-success btn-lg">Lapor Masalah Lingkungan</a>
         <a href="{{ route('challenges.index') }}" class="btn btn-primary btn-lg">Lihat Tantangan</a>
