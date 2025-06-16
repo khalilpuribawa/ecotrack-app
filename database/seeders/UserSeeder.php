@@ -33,7 +33,6 @@ class UserSeeder extends Seeder
             'email' => 'citra@example.com',
             'password' => Hash::make('password'),
         ]);
-        UserPoint::create(['user_id' => $user2->id, 'total_points' => 75]);
         
         // 3. Gunakan Factory untuk membuat lebih banyak user
         User::factory()->count(10)->create()->each(function ($user) {

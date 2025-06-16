@@ -54,9 +54,6 @@
             <li class="nav-item"><a href="{{ route('admin.green-points.index') }}"
                     class="nav-link {{ request()->routeIs('admin.green-points.*') ? 'active' : '' }}"><i
                         class="bi bi-geo-alt"></i> Titik Hijau</a></li>
-            <li class="nav-item"><a href="{{ route('admin.articles.index') }}"
-                    class="nav-link {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}"><i
-                        class="bi bi-journal-text"></i> Artikel</a></li>
             <li class="nav-item"><a href="{{ route('admin.challenges.index') }}"
                     class="nav-link {{ request()->routeIs('admin.challenges.*') ? 'active' : '' }}"><i
                         class="bi bi-trophy"></i> Tantangan</a></li>

@@ -13,7 +13,7 @@ return new class extends Migration
 {
     Schema::create('green_points', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->foreignId('added_by')->constrained('users')->onDelete('cascade');
         $table->string('name');
         $table->text('description');
         $table->string('type'); // Kolom 'type' dari error sebelumnya

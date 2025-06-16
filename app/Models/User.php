@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'avatar','points'
+        'name', 'email', 'password', 'role','points', 'avatar',
     ];
 
     protected $hidden = [
@@ -64,7 +64,7 @@ class User extends Authenticatable
     }
     // File: app/Models/User.php
 
-// Pastikan relasi ke UserPoint ada
+
 
 
 }

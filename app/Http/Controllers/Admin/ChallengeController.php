@@ -65,6 +65,48 @@ public function create()
         return view('admin.challenges.review', compact('challenge', 'submissions'));
     }
 
+    // app/Http/Controllers/Admin/ChallengeController.php
+
+// ... (use statements dan method lain yang sudah ada) ...
+
+/**
+ * Menampilkan form untuk mengedit tantangan yang ada.
+ *
+ * @param  \App\Models\Challenge  $challenge
+ * @return \Illuminate\View\View
+ */
+public function edit(Challenge $challenge)
+{
+    // Method ini akan menerima objek Challenge yang ditemukan oleh Laravel
+    // berdasarkan ID di URL (misal: /challenges/1/edit).
+
+    // Kirim data challenge tersebut ke sebuah file view.
+    // Kita akan membuat file view ini selanjutnya.
+    return view('admin.challenges.edit', compact('challenge'));
+}
+
+public function update(Request $request, Challenge $challenge)
+{
+    // 1. Validasi semua input dari form.
+    // Kita perlu memastikan 'title' unik, kecuali untuk dirinya sendiri.
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255|unique:challenges,title,' . $challenge->id,
+        'description' => 'required|string',
+        'point_reward' => 'required|integer|min:1',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after_or_equal:start_date',
+        'badge' => 'nullable|string|max:50',
+    ]);
+
+    // 2. Jika validasi berhasil, update data di database.
+    $challenge->update($validatedData);
+
+    // 3. Redirect kembali ke halaman daftar dengan pesan sukses.
+    return redirect()->route('admin.challenges.index')
+                     ->with('success', 'Tantangan berhasil diperbarui!');
+}
+
+// ... (method lain seperti update, destroy) ...
     /**
      * Menyetujui submission, menambah poin, dan mengubah status.
      */

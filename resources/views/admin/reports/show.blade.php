@@ -31,7 +31,7 @@
                 style="max-width: 500px;">
             @endif
 
-            <a href="{{ route('reports.index') }}" class="btn btn-primary mt-3">Kembali ke Daftar Laporan</a>
+            <a href="{{ route('admin.reports.index') }}" class="btn btn-primary mt-3">Kembali ke Daftar Laporan</a>
         </div>
     </div>
 </div>

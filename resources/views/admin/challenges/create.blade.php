@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- Sesuaikan dengan layout admin Anda --}}
+@extends('admin.layouts.app') {{-- Sesuaikan dengan layout admin Anda --}}
 @section('title', 'Buat Tantangan Baru')
 
 @section('content')

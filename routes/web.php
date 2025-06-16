@@ -127,6 +127,13 @@ Route::post('/challenges/{challenge}/submissions/{user}/reject', [AdminChallenge
     // Manajemen Pengguna
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
     Route::post('/users/{user}/update-role', [AdminUserController::class, 'updateRole'])->name('users.updateRole');
+      Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+
+    // --- TAMBAHKAN DUA RUTE INI ---
+    Route::get('/users/create', [AdminUserController::class, 'create'])->name('users.create');
+    Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
+    
+    Route::post('/users/{user}/update-role', [AdminUserController::class, 'updateRole'])->name('users.updateRole');
     
     // Manajemen Komunitas
     Route::get('/communities', [AdminCommunityController::class, 'index'])->name('communities.index');
@@ -137,4 +144,43 @@ Route::post('/challenges/{challenge}/submissions/{user}/reject', [AdminChallenge
 
  Route::get('/tes-halaman-error', function () {
     return view('test');
+});
+
+// routes/web.php
+
+// ... (semua rute Anda yang lain) ...
+
+
+// ===== RUTE UNTUK DIAGNOSIS FINAL =====
+Route::get('/tes-user-final', function () {
+    echo "<h1>Mulai Diagnosis Final...</h1>";
+
+    try {
+        echo "<p>Mencoba mengambil data User dengan ID 1...</p>";
+
+        // Kita coba ambil satu user saja dari database
+        $user = \App\Models\User::find(1);
+
+        if ($user) {
+            echo "<p style='color:green; font-weight:bold;'>BERHASIL! Data user dengan ID 1 ditemukan.</p>";
+            echo "<p>Ini artinya tidak ada masalah dengan Model User Anda.</p>";
+            echo "<pre>";
+            print_r($user->toArray());
+            echo "</pre>";
+        } else {
+            echo "<p style='color:orange; font-weight:bold;'>User dengan ID 1 tidak ditemukan, tapi query berhasil dijalankan.</p>";
+        }
+
+    } catch (\Exception $e) {
+        // Jika baris \App\Models\User::find(1) menghasilkan error, kita akan menangkapnya di sini.
+        echo "<h2 style='color:red;'>ERROR DITEMUKAN!</h2>";
+        echo "<p>Ini adalah sumber masalah yang kita cari selama ini.</p>";
+        echo "<p><strong>Pesan Error:</strong> " . $e->getMessage() . "</p>";
+        echo "<p><strong>Terjadi di File:</strong> " . $e->getFile() . "</p>";
+        echo "<p><strong>Pada Baris:</strong> " . $e->getLine() . "</p>";
+        echo "<hr><h3>Jejak Lengkap (Stack Trace):</h3>";
+        echo "<pre>" . $e->getTraceAsString() . "</pre>";
+    }
+
+    echo "<h1>...Diagnosis Selesai.</h1>";
 });

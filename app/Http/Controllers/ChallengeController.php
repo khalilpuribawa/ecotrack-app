@@ -55,7 +55,7 @@ class ChallengeController extends Controller
     {
         // 1. Validasi input: pastikan yang di-upload adalah gambar.
         $request->validate([
-            'proof_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'proof_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5000', 
         ]);
 
         // 2. Dapatkan pengguna yang sedang login.
