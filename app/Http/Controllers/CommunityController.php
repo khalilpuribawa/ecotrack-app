@@ -38,7 +38,7 @@ class CommunityController extends Controller
         // Otomatis jadikan pembuat sebagai admin komunitas
         $community->members()->attach(Auth::id(), ['role' => 'admin']);
 
-        return redirect()->route('communities.show', $community)->with('success', 'Komunitas berhasil dibuat!');
+        return redirect()->route('communities.show', $community)->with('success', 'Community created successfully!');
     }
 
     // Menampilkan detail satu komunitas
@@ -59,9 +59,9 @@ class CommunityController extends Controller
         // Cek agar tidak join dua kali
         if (!Auth::user()->communities()->where('community_id', $community->id)->exists()) {
             $community->members()->attach(Auth::id(), ['role' => 'member']);
-            return back()->with('success', 'Anda berhasil bergabung dengan komunitas ' . $community->name);
+            return back()->with('success', 'You have successfully joined ' . $community->name);
         }
-        return back()->with('error', 'Anda sudah menjadi anggota komunitas ini.');
+        return back()->with('error', 'You are already a member of this community.');
     }
     
     // Logika untuk user keluar dari komunitas
@@ -69,10 +69,10 @@ class CommunityController extends Controller
     {
         // Pembuat komunitas tidak bisa keluar
         if ($community->created_by == Auth::id()) {
-            return back()->with('error', 'Anda adalah pembuat komunitas ini dan tidak bisa keluar.');
+            return back()->with('error', 'You created this community and cannot leave it.');
         }
 
         Auth::user()->communities()->detach($community->id);
-        return back()->with('success', 'Anda telah keluar dari komunitas ' . $community->name);
+        return back()->with('success', 'You have left ' . $community->name);
     }
 }

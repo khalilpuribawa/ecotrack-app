@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Eco-Challenge Mingguan - EcoTrack.ID')
+@section('title', 'Weekly Eco-Challenges - EcoTrack.ID')
 
 @section('content')
 <style>
@@ -519,31 +519,31 @@
         <div class="hero-badge">
             🏆 Weekly Eco-Challenge
         </div>
-        <h1 class="hero-title">Tantangan Hijau Tersedia</h1>
+        <h1 class="hero-title">Available Green Challenges</h1>
         <p class="hero-subtitle">
-            Ikuti tantangan mingguan, kumpulkan poin, dan buktikan kepedulianmu terhadap lingkungan!
-            Setiap aksi kecil membuat perbedaan besar untuk planet kita.
+            Take on weekly challenges, collect reward points, and champion environmental sustainability!
+            Every small green action makes a lasting impact on our planet.
         </p>
         <div class="hero-stats">
             <div class="stat-item">
                 <i class="fas fa-trophy"></i>
                 <div>
                     <div class="stat-number">{{ $challenges->count() }}</div>
-                    <div class="stat-label">Tantangan Aktif</div>
+                    <div class="stat-label">Active Challenges</div>
                 </div>
             </div>
             <div class="stat-item">
                 <i class="fas fa-users"></i>
                 <div>
                     <div class="stat-number">{{ rand(150, 500) }}</div>
-                    <div class="stat-label">Peserta Aktif</div>
+                    <div class="stat-label">Active Participants</div>
                 </div>
             </div>
             <div class="stat-item">
                 <i class="fas fa-coins"></i>
                 <div>
                     <div class="stat-number">{{ $challenges->sum('point_reward') }}</div>
-                    <div class="stat-label">Total Poin Tersedia</div>
+                    <div class="stat-label">Total Points Available</div>
                 </div>
             </div>
         </div>
@@ -554,24 +554,24 @@
 <div class="filter-section">
     <div class="filter-title">
         <i class="fas fa-filter"></i>
-        Filter Tantangan
+        Filter Challenges
     </div>
     <div class="filter-buttons">
         <a href="#" class="filter-btn active">
             <i class="fas fa-list me-1"></i>
-            Semua Tantangan
+            All Challenges
         </a>
         <a href="#" class="filter-btn">
             <i class="fas fa-play me-1"></i>
-            Sedang Berlangsung
+            Ongoing
         </a>
         <a href="#" class="filter-btn">
             <i class="fas fa-clock me-1"></i>
-            Akan Datang
+            Upcoming
         </a>
         <a href="#" class="filter-btn">
             <i class="fas fa-star me-1"></i>
-            Poin Tertinggi
+            Highest Points
         </a>
     </div>
 </div>
@@ -588,15 +588,15 @@
 
             if ($now->lt($startDate)) {
             $status = 'upcoming';
-            $statusText = 'Akan Datang';
+            $statusText = 'Upcoming';
             $statusIcon = 'clock';
             } elseif ($now->between($startDate, $endDate)) {
             $status = 'active';
-            $statusText = 'Sedang Berlangsung';
+            $statusText = 'Ongoing';
             $statusIcon = 'play';
             } else {
             $status = 'ended';
-            $statusText = 'Berakhir';
+            $statusText = 'Ended';
             $statusIcon = 'stop';
             }
             @endphp
@@ -626,7 +626,7 @@
                     <div class="meta-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <span>{{ rand(20, 80) }} peserta</span>
+                    <span>{{ rand(20, 80) }} participants</span>
                 </div>
             </div>
         </div>
@@ -636,23 +636,23 @@
                 <div class="points-display">
                     <i class="fas fa-coins"></i>
                     <span class="points-number">{{ number_format($challenge->point_reward) }}</span>
-                    <span>Poin</span>
+                    <span>Points</span>
                 </div>
 
                 @if($status === 'active')
                 <a href="{{ route('challenges.show', $challenge) }}" class="challenge-btn">
                     <i class="fas fa-play"></i>
-                    Ikuti Tantangan
+                    Join Challenge
                 </a>
                 @elseif($status === 'upcoming')
                 <a href="{{ route('challenges.show', $challenge) }}" class="challenge-btn">
                     <i class="fas fa-eye"></i>
-                    Lihat Detail
+                    View Details
                 </a>
                 @else
                 <button class="challenge-btn disabled" disabled>
                     <i class="fas fa-stop"></i>
-                    Tantangan Berakhir
+                    Challenge Ended
                 </button>
                 @endif
             </div>
@@ -666,7 +666,7 @@
                 @endphp
 
                 <div class="progress-label">
-                    <span class="progress-text">Progress Waktu</span>
+                    <span class="progress-text">Time Progress</span>
                     <span class="progress-percentage">{{ number_format($progressPercentage, 1) }}%</span>
                 </div>
                 <div class="progress-bar-container">
@@ -681,13 +681,13 @@
         <div class="empty-icon">
             <i class="fas fa-trophy"></i>
         </div>
-        <h3 class="empty-title">Tidak Ada Tantangan Tersedia</h3>
+        <h3 class="empty-title">No Challenges Available</h3>
         <p class="empty-text">
-            Saat ini tidak ada tantangan yang tersedia. Pantau terus halaman ini untuk tantangan baru yang menarik!
+            There are currently no active challenges. Check back soon for new exciting green challenges!
         </p>
         <a href="{{ route('dashboard') }}" class="empty-btn">
             <i class="fas fa-home"></i>
-            Kembali ke Dashboard
+            Back to Dashboard
         </a>
     </div>
     @endforelse

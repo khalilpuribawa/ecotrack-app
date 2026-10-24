@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -575,7 +575,7 @@
         <div class="loader-content">
             <div class="loader-spinner"></div>
             <h5>🌱 EcoTrack.ID</h5>
-            <p>Memuat platform hijau...</p>
+            <p>Loading green platform...</p>
         </div>
     </div>
 
@@ -586,7 +586,7 @@
                 <span class="brand-emoji">🌱</span>
                 <span>EcoTrack.ID</span>
             </a>
-            <span class="slogan-modern d-none d-lg-block">"Jejak Aksi Hijaumu, Dampak untuk Bumi."</span>
+            <span class="slogan-modern d-none d-lg-block">"Track Your Green Action, Impact the Earth."</span>
 
             <button class="navbar-toggler navbar-toggler-modern" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
@@ -603,18 +603,18 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-modern" href="{{ route('reports.index') }}">
-                            <i class="fas fa-map-marked-alt"></i>Peta Laporan
+                            <i class="fas fa-map-marked-alt"></i>Report Map
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-modern position-relative" href="{{ route('challenges.index') }}">
-                            <i class="fas fa-trophy"></i>Tantangan
+                            <i class="fas fa-trophy"></i>Challenges
                             <span class="notification-badge">3</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-modern" href="{{ route('green-map.index') }}">
-                            <i class="fas fa-leaf"></i>Peta Hijau
+                            <i class="fas fa-leaf"></i>Green Map
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -628,22 +628,22 @@
                         <ul class="dropdown-menu dropdown-menu-modern dropdown-menu-end">
                             <li>
                                 <a class="dropdown-item dropdown-item-modern" href="#">
-                                    <i class="fas fa-user"></i>Profil Saya
+                                    <i class="fas fa-user"></i>My Profile
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item dropdown-item-modern" href="#">
-                                    <i class="fas fa-chart-line"></i>Statistik
+                                    <i class="fas fa-chart-line"></i>Statistics
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item dropdown-item-modern" href="#">
-                                    <i class="fas fa-cog"></i>Pengaturan
+                                    <i class="fas fa-cog"></i>Settings
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item dropdown-item-modern" href="#">
-                                    <i class="fas fa-question-circle"></i>Bantuan
+                                    <i class="fas fa-question-circle"></i>Help & FAQ
                                 </a>
                             </li>
                             <li>
@@ -653,7 +653,7 @@
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button type="submit" class="dropdown-item dropdown-item-modern text-danger">
-                                        <i class="fas fa-sign-out-alt"></i>Logout
+                                        <i class="fas fa-sign-out-alt"></i>Sign Out
                                     </button>
                                 </form>
                             </li>
@@ -662,7 +662,7 @@
                     @else
                     <li class="nav-item">
                         <a class="nav-link nav-link-modern" href="{{ route('login') }}">
-                            <i class="fas fa-sign-in-alt"></i>Login
+                            <i class="fas fa-sign-in-alt"></i>Sign In
                         </a>
                     </li>
                     <li class="nav-item">
@@ -688,13 +688,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">🌱 EcoTrack.ID</div>
-                <p class="footer-text">Platform kolaboratif untuk lingkungan yang lebih baik</p>
+                <p class="footer-text">Collaborative platform for a cleaner and greener planet</p>
 
                 <div class="footer-links">
-                    <a href="#" class="footer-link">Tentang Kami</a>
-                    <a href="#" class="footer-link">Kebijakan Privasi</a>
-                    <a href="#" class="footer-link">Syarat & Ketentuan</a>
-                    <a href="#" class="footer-link">Kontak</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact</a>
                 </div>
 
                 <div class="social-links">

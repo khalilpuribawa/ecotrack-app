@@ -533,10 +533,10 @@ body {
         <!-- Header -->
         <div class="login-header">
             <div class="eco-badge">
-                🌱 Selamat Datang Kembali
+                🌱 Welcome Back
             </div>
-            <h1 class="login-title">Masuk ke EcoTrack.ID</h1>
-            <p class="login-subtitle">Lanjutkan perjalanan hijau Anda</p>
+            <h1 class="login-title">Sign In to EcoTrack.ID</h1>
+            <p class="login-subtitle">Continue your green journey</p>
         </div>
 
         <!-- Body -->
@@ -548,11 +548,11 @@ body {
                 <div class="form-row">
                     <!-- Email Field -->
                     <div class="form-group-modern">
-                        <label for="email" class="form-label-modern">Alamat Email</label>
+                        <label for="email" class="form-label-modern">Email Address</label>
                         <div class="input-wrapper">
                             <input id="email" type="email"
                                 class="form-control-modern @error('email') is-invalid @enderror" name="email"
-                                value="{{ old('email') }}" required autofocus placeholder="Masukkan email Anda">
+                                value="{{ old('email') }}" required autofocus placeholder="Enter your email address">
                             <i class="fas fa-envelope input-icon"></i>
                         </div>
                         @error('email')
@@ -569,7 +569,7 @@ body {
                         <div class="input-wrapper">
                             <input id="password" type="password"
                                 class="form-control-modern @error('password') is-invalid @enderror" name="password"
-                                required placeholder="Masukkan password Anda">
+                                required placeholder="Enter your password">
                             <i class="fas fa-lock input-icon"></i>
                             <button type="button" class="password-toggle" onclick="togglePassword()">
                                 <i class="fas fa-eye" id="passwordIcon"></i>
@@ -589,11 +589,11 @@ body {
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember">
                         <label class="form-check-label" for="remember">
-                            Ingat saya
+                            Remember me
                         </label>
                     </div>
                     <a href="#" class="forgot-link">
-                        Lupa password?
+                        Forgot password?
                     </a>
                 </div>
 
@@ -603,7 +603,7 @@ body {
                         <div class="loading-spinner"></div>
                         <span class="btn-text">
                             <i class="fas fa-sign-in-alt"></i>
-                            Masuk ke Dashboard
+                            Sign In to Dashboard
                         </span>
                     </button>
                 </div>
@@ -611,7 +611,7 @@ body {
 
             <!-- Divider -->
             <div class="divider">
-                <span>atau</span>
+                <span>or continue with</span>
             </div>
 
             <!-- Social Login -->
@@ -630,8 +630,8 @@ body {
             <div class="register-link">
                 <p class="mb-0">
                     <i class="fas fa-user-plus me-2" style="color: #10b981;"></i>
-                    Belum punya akun?
-                    <a href="{{ route('register') }}">Daftar sekarang dan mulai berkontribusi!</a>
+                    Don't have an account?
+                    <a href="{{ route('register') }}">Register now and start contributing!</a>
                 </p>
             </div>
         </div>

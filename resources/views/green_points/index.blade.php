@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Peta Hijau Komunitas - EcoTrack.ID')
+@section('title', 'Community Green Map - EcoTrack.ID')
 
 @section('content')
 <style>
@@ -612,12 +612,12 @@
 <div class="green-map-hero">
     <div class="hero-content">
         <div class="hero-badge">
-            🌱 Peta Hijau Komunitas
+            🌱 Community Green Map
         </div>
-        <h1 class="hero-title">Jelajahi Lokasi Ramah Lingkungan</h1>
+        <h1 class="hero-title">Explore Eco-Friendly Locations</h1>
         <p class="hero-subtitle">
-            Temukan dan bagikan lokasi-lokasi hijau seperti Bank Sampah, Taman Kota,
-            Tempat Daur Ulang, dan komunitas peduli lingkungan di sekitar Anda.
+            Discover and share green spots such as Recycling Hubs, City Parks,
+            Waste Banks, and local sustainability groups near you.
         </p>
 
         <div class="hero-stats">
@@ -625,28 +625,28 @@
                 <i class="fas fa-map-marker-alt"></i>
                 <div>
                     <div class="stat-number">{{ $greenPoints->count() }}</div>
-                    <div class="stat-label">Titik Hijau</div>
+                    <div class="stat-label">Green Spots</div>
                 </div>
             </div>
             <div class="stat-item">
                 <i class="fas fa-recycle"></i>
                 <div>
-                    <div class="stat-number">{{ $greenPoints->where('type', 'Bank Sampah')->count() }}</div>
-                    <div class="stat-label">Bank Sampah</div>
+                    <div class="stat-number">{{ $greenPoints->where('type', 'Bank Sampah')->count() + $greenPoints->where('type', 'Recycling Station')->count() }}</div>
+                    <div class="stat-label">Recycling Hubs</div>
                 </div>
             </div>
             <div class="stat-item">
                 <i class="fas fa-tree"></i>
                 <div>
-                    <div class="stat-number">{{ $greenPoints->where('type', 'Taman')->count() }}</div>
-                    <div class="stat-label">Taman Hijau</div>
+                    <div class="stat-number">{{ $greenPoints->where('type', 'Taman')->count() + $greenPoints->where('type', 'Urban Eco Park')->count() }}</div>
+                    <div class="stat-label">Eco Parks</div>
                 </div>
             </div>
             <div class="stat-item">
                 <i class="fas fa-users"></i>
                 <div>
-                    <div class="stat-number">{{ $greenPoints->where('type', 'Komunitas Hijau')->count() }}</div>
-                    <div class="stat-label">Komunitas</div>
+                    <div class="stat-number">{{ $greenPoints->where('type', 'Komunitas Hijau')->count() + $greenPoints->where('type', 'Green Community')->count() }}</div>
+                    <div class="stat-label">Communities</div>
                 </div>
             </div>
         </div>
@@ -659,40 +659,40 @@
         <div class="card-icon bank-sampah">
             <i class="fas fa-recycle"></i>
         </div>
-        <h3 class="card-title">Bank Sampah</h3>
-        <p class="card-description">Tempat pengumpulan dan pengelolaan sampah untuk didaur ulang</p>
-        <div class="card-count">{{ $greenPoints->where('type', 'Bank Sampah')->count() }}</div>
-        <div class="card-label">Lokasi Tersedia</div>
+        <h3 class="card-title">Waste Banks</h3>
+        <p class="card-description">Community collection facilities managing plastics, paper, and recyclables</p>
+        <div class="card-count">{{ $greenPoints->where('type', 'Bank Sampah')->count() + $greenPoints->where('type', 'Recycling Station')->count() }}</div>
+        <div class="card-label">Available Spots</div>
     </div>
 
     <div class="info-card">
         <div class="card-icon taman">
             <i class="fas fa-tree"></i>
         </div>
-        <h3 class="card-title">Taman Hijau</h3>
-        <p class="card-description">Ruang terbuka hijau untuk rekreasi dan paru-paru kota</p>
-        <div class="card-count">{{ $greenPoints->where('type', 'Taman')->count() }}</div>
-        <div class="card-label">Lokasi Tersedia</div>
+        <h3 class="card-title">Eco Parks</h3>
+        <p class="card-description">Public green open spaces for urban wellness and city air quality</p>
+        <div class="card-count">{{ $greenPoints->where('type', 'Taman')->count() + $greenPoints->where('type', 'Urban Eco Park')->count() }}</div>
+        <div class="card-label">Available Spots</div>
     </div>
 
     <div class="info-card">
         <div class="card-icon daur-ulang">
             <i class="fas fa-sync-alt"></i>
         </div>
-        <h3 class="card-title">Tempat Daur Ulang</h3>
-        <p class="card-description">Fasilitas khusus untuk mendaur ulang berbagai jenis material</p>
-        <div class="card-count">{{ $greenPoints->where('type', 'Tempat Daur Ulang')->count() }}</div>
-        <div class="card-label">Lokasi Tersedia</div>
+        <h3 class="card-title">Recycling Hubs</h3>
+        <p class="card-description">Specialized drop-off centers for circular and reusable materials</p>
+        <div class="card-count">{{ $greenPoints->where('type', 'Tempat Daur Ulang')->count() + $greenPoints->where('type', 'Recycling Station')->count() }}</div>
+        <div class="card-label">Available Spots</div>
     </div>
 
     <div class="info-card">
         <div class="card-icon komunitas">
             <i class="fas fa-users"></i>
         </div>
-        <h3 class="card-title">Komunitas Hijau</h3>
-        <p class="card-description">Kelompok masyarakat yang aktif dalam kegiatan lingkungan</p>
-        <div class="card-count">{{ $greenPoints->where('type', 'Komunitas Hijau')->count() }}</div>
-        <div class="card-label">Lokasi Tersedia</div>
+        <h3 class="card-title">Green Communities</h3>
+        <p class="card-description">Citizen action groups organizing cleanups and ecological activities</p>
+        <div class="card-count">{{ $greenPoints->where('type', 'Komunitas Hijau')->count() + $greenPoints->where('type', 'Green Community')->count() }}</div>
+        <div class="card-label">Available Spots</div>
     </div>
 </div>
 
@@ -703,20 +703,20 @@
             <div class="title-icon">
                 <i class="fas fa-map"></i>
             </div>
-            Peta Interaktif
+            Interactive Map
         </h2>
         <div class="map-controls">
             <button class="btn-map active" id="showAllBtn">
                 <i class="fas fa-globe"></i>
-                Tampilkan Semua
+                Show All
             </button>
             <button class="btn-map" id="locateBtn">
                 <i class="fas fa-crosshairs"></i>
-                Lokasi Saya
+                My Location
             </button>
             <button class="btn-map" id="fullscreenBtn">
                 <i class="fas fa-expand"></i>
-                Layar Penuh
+                Fullscreen
             </button>
         </div>
     </div>
@@ -725,7 +725,7 @@
         <!-- Loading State -->
         <div class="map-loading" id="mapLoading">
             <div class="loading-spinner"></div>
-            <div class="loading-text">Memuat peta...</div>
+            <div class="loading-text">Loading map...</div>
         </div>
 
         <!-- Map -->
@@ -735,46 +735,46 @@
         <div class="map-overlay">
             <div class="overlay-title">
                 <i class="fas fa-info-circle"></i>
-                Kategori Lokasi
+                Location Categories
             </div>
             <ul class="overlay-list">
                 <li class="overlay-item">
                     <div class="overlay-icon icon-bank-sampah"></div>
-                    <span>Bank Sampah</span>
+                    <span>Waste Bank</span>
                 </li>
                 <li class="overlay-item">
                     <div class="overlay-icon icon-taman"></div>
-                    <span>Taman Hijau</span>
+                    <span>Eco Park</span>
                 </li>
                 <li class="overlay-item">
                     <div class="overlay-icon icon-tempat-daur-ulang"></div>
-                    <span>Tempat Daur Ulang</span>
+                    <span>Recycling Hub</span>
                 </li>
                 <li class="overlay-item">
                     <div class="overlay-icon icon-komunitas-hijau"></div>
-                    <span>Komunitas Hijau</span>
+                    <span>Green Community</span>
                 </li>
             </ul>
         </div>
 
         <!-- Map Legend -->
         <div class="map-legend">
-            <div class="legend-title">Keterangan</div>
+            <div class="legend-title">Legend</div>
             <div class="legend-item">
                 <div class="legend-color" style="background: #10b981;"></div>
-                <span>Bank Sampah</span>
+                <span>Waste Bank</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color" style="background: #059669;"></div>
-                <span>Taman</span>
+                <span>Parks</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color" style="background: #0d9488;"></div>
-                <span>Daur Ulang</span>
+                <span>Recycling</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color" style="background: #047857;"></div>
-                <span>Komunitas</span>
+                <span>Community</span>
             </div>
         </div>
     </div>
@@ -786,15 +786,15 @@
         <div class="action-icon">
             <i class="fas fa-plus"></i>
         </div>
-        Kontribusi untuk Komunitas
+        Contribute to the Community
     </h3>
     <p class="action-description">
-        Bantu komunitas dengan menambahkan lokasi hijau baru yang Anda ketahui.
-        Setiap kontribusi Anda akan membantu orang lain menemukan tempat-tempat ramah lingkungan.
+        Help our network by adding new eco-friendly locations you know about.
+        Your contribution empowers others to practice sustainable habits easily.
     </p>
     <a href="{{ route('green-map.create') }}" class="btn-primary-modern">
         <i class="fas fa-map-marker-alt"></i>
-        Tambah Titik Hijau Baru
+        Add New Green Spot
     </a>
 </div>
 
@@ -935,12 +935,12 @@ function initializeMap() {
                 iconSize: [20, 20],
                 iconAnchor: [10, 10]
             })
-        }).addTo(map).bindPopup('Lokasi Anda').openPopup();
+        }).addTo(map).bindPopup('Your Location').openPopup();
     });
 
     map.on('locationerror', function(e) {
         console.log('Location error:', e.message);
-        alert('Tidak dapat mendeteksi lokasi Anda. Pastikan GPS aktif dan izinkan akses lokasi.');
+        alert('Unable to detect your location. Please ensure GPS/location access is enabled.');
     });
 
     function updateActiveButton(activeBtn) {

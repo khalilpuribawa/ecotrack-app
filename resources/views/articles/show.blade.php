@@ -6,7 +6,7 @@
     <div class="col-lg-10 mx-auto">
         <h1>{{ $article->title }}</h1>
         <p class="text-muted">
-            Oleh: {{ $article->author->name }} | Dipublikasikan pada: {{ $article->created_at->format('d F Y') }}
+            By: {{ $article->author->name }} | Published on: {{ $article->created_at->format('d F Y') }}
         </p>
         <hr>
 
@@ -16,13 +16,13 @@
                     allowfullscreen></iframe>
             </div>
         @elseif($article->type === 'infographic' && $article->url_media)
-            <img src="{{ $article->url_media }}" class="img-fluid rounded mb-4" alt="Infografis {{ $article->title }}">
+            <img src="{{ $article->url_media }}" class="img-fluid rounded mb-4" alt="Infographic {{ $article->title }}">
         @endif
 
         <div class="fs-5 article-content">
             {!! nl2br(e($article->content)) !!}
         </div>
 
-        <a href="{{ route('articles.index') }}" class="btn btn-secondary mt-4">Kembali ke Daftar Artikel</a>
+        <a href="{{ route('articles.index') }}" class="btn btn-secondary mt-4">Back to Articles</a>
     </div>
 @endsection

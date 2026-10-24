@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Buat Laporan Baru - EcoTrack.ID')
+@section('title', 'Submit Environmental Report - EcoTrack.ID')
 
 @section('content')
 <style>
@@ -271,8 +271,8 @@ textarea.form-control {
 
 <!-- Hero Section -->
 <div class="hero-section">
-    <h1 class="hero-title">🚨 Buat Laporan Lingkungan</h1>
-    <p class="hero-subtitle">Laporkan masalah lingkungan di sekitar Anda untuk membantu komunitas</p>
+    <h1 class="hero-title">🚨 Report Environmental Incident</h1>
+    <p class="hero-subtitle">Report environmental issues around you to mobilize community assistance</p>
 </div>
 
 <!-- Map Section -->
@@ -280,16 +280,16 @@ textarea.form-control {
     <div class="map-header">
         <h3 class="map-title">
             <i class="fas fa-map-marker-alt"></i>
-            Pilih Lokasi Masalah
+            Select Incident Location
         </h3>
         <div class="map-controls">
             <button class="btn-map" id="locateBtn">
                 <i class="fas fa-crosshairs"></i>
-                Lokasi Saya
+                My Location
             </button>
             <button class="btn-map" id="clearBtn">
                 <i class="fas fa-times"></i>
-                Hapus Marker
+                Remove Marker
             </button>
         </div>
     </div>
@@ -298,15 +298,15 @@ textarea.form-control {
         <div id="map-create"></div>
 
         <div class="map-instructions">
-            <strong>📍 Cara Menggunakan:</strong><br>
-            • Klik pada peta untuk menandai lokasi<br>
-            • Atau gunakan tombol "Lokasi Saya"<br>
-            • Koordinat akan terisi otomatis
+            <strong>📍 How to use:</strong><br>
+            • Click anywhere on the map to pinpoint location<br>
+            • Or click "My Location" to auto-detect<br>
+            • Coordinates will be populated automatically
         </div>
 
         <div class="coordinates-display" id="coordsDisplay" style="display: none;">
-            <strong>Koordinat Terpilih:</strong><br>
-            <span id="displayCoords">Belum dipilih</span>
+            <strong>Selected Coordinates:</strong><br>
+            <span id="displayCoords">Not selected yet</span>
         </div>
     </div>
 </div>
@@ -315,7 +315,7 @@ textarea.form-control {
 <div class="form-section">
     <h2 class="form-title">
         <i class="fas fa-edit"></i>
-        Detail Laporan
+        Incident Report Details
     </h2>
 
     <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data" id="reportForm">
@@ -323,29 +323,29 @@ textarea.form-control {
 
         <div class="form-group">
             <label for="category" class="form-label">
-                <i class="fas fa-tag"></i> Kategori Laporan
+                <i class="fas fa-tag"></i> Report Category
             </label>
             <select name="category" id="category" class="form-select" required>
-                <option value="">Pilih kategori masalah...</option>
-                <option value="Sampah menumpuk">🗑 Sampah Menumpuk</option>
-                <option value="Kebakaran lahan">🔥 Kebakaran Lahan</option>
-                <option value="Polusi udara/air">💨 Polusi Udara/Air</option>
-                <option value="Penebangan pohon liar">🌳 Penebangan Pohon Liar</option>
+                <option value="">Select incident category...</option>
+                <option value="Illegal waste dumping">🗑 Illegal Waste Dumping</option>
+                <option value="Brush fire / Land burning">🔥 Brush Fire / Land Burning</option>
+                <option value="Air / Water pollution">💨 Air / Water Pollution</option>
+                <option value="Illegal logging / Deforestation">🌳 Illegal Logging / Deforestation</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="description" class="form-label">
-                <i class="fas fa-align-left"></i> Deskripsi Masalah
+                <i class="fas fa-align-left"></i> Incident Description
             </label>
             <textarea name="description" id="description" class="form-control"
-                placeholder="Jelaskan masalah lingkungan yang Anda temukan secara detail..."
+                placeholder="Describe the environmental incident in detail (location, severity, urgency)..."
                 required>{{ old('description') }}</textarea>
         </div>
 
         <div class="form-group">
             <label class="form-label">
-                <i class="fas fa-map-pin"></i> Koordinat Lokasi
+                <i class="fas fa-map-pin"></i> GPS Coordinates
             </label>
             <div class="coordinate-row">
                 <div>
@@ -361,14 +361,14 @@ textarea.form-control {
 
         <div class="form-group">
             <label for="image" class="form-label">
-                <i class="fas fa-camera"></i> Foto Bukti (Opsional, max 2MB)
+                <i class="fas fa-camera"></i> Photo Proof (Optional, max 2MB)
             </label>
             <input type="file" name="image" id="image" class="form-control" accept="image/*">
         </div>
 
         <button type="submit" class="btn-submit" id="submitBtn" disabled>
             <i class="fas fa-paper-plane"></i>
-            <span id="submitText">Pilih Lokasi Terlebih Dahulu</span>
+            <span id="submitText">Please Select Location on Map First</span>
         </button>
     </form>
 </div>
@@ -427,7 +427,7 @@ function initializeMap() {
 
         // Enable submit button
         submitBtn.disabled = false;
-        submitText.textContent = 'Kirim Laporan';
+        submitText.textContent = 'Submit Report';
 
         // Style inputs as valid
         latInput.style.borderColor = '#10b981';
@@ -442,7 +442,7 @@ function initializeMap() {
 
     function onLocationError(e) {
         console.log('Location error:', e.message);
-        alert('Tidak dapat mendeteksi lokasi Anda. Silakan klik pada peta untuk memilih lokasi.');
+        alert('Could not detect your current location. Please click on the map to place a pin.');
     }
 
     // Map events
@@ -457,7 +457,7 @@ function initializeMap() {
     // Control buttons
     document.getElementById('locateBtn').addEventListener('click', function() {
         var btn = this;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencari...';
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Locating...';
         btn.classList.add('active');
 
         map.locate({
@@ -468,7 +468,7 @@ function initializeMap() {
         });
 
         setTimeout(function() {
-            btn.innerHTML = '<i class="fas fa-crosshairs"></i> Lokasi Saya';
+            btn.innerHTML = '<i class="fas fa-crosshairs"></i> My Location';
             btn.classList.remove('active');
         }, 3000);
     });
@@ -484,7 +484,7 @@ function initializeMap() {
         coordsDisplay.style.display = 'none';
 
         submitBtn.disabled = true;
-        submitText.textContent = 'Pilih Lokasi Terlebih Dahulu';
+        submitText.textContent = 'Please Select Location on Map First';
 
         latInput.style.borderColor = '#e5e7eb';
         lonInput.style.borderColor = '#e5e7eb';
@@ -502,30 +502,36 @@ function initializeMap() {
         var errors = [];
 
         if (!latInput.value || !lonInput.value) {
-            errors.push('Pilih lokasi pada peta');
+            errors.push('Please select a location on the map');
             isValid = false;
         }
 
         if (!categorySelect.value) {
-            errors.push('Pilih kategori laporan');
+            errors.push('Please select a report category');
             categorySelect.style.borderColor = '#dc2626';
             isValid = false;
         }
 
         if (descriptionTextarea.value.trim().length < 10) {
-            errors.push('Deskripsi minimal 10 karakter');
+            errors.push('Description must be at least 10 characters');
             descriptionTextarea.style.borderColor = '#dc2626';
             isValid = false;
         }
 
         if (!isValid) {
-            alert('Error:\n' + errors.join('\n'));
+            alert('Validation Error:\n' + errors.join('\n'));
             return;
         }
 
         // Show loading
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim Laporan...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Report...';
+
+        // Submit form
+        setTimeout(function() {
+            form.submit();
+        }, 1000);
+    });
 
         // Submit form
         setTimeout(function() {

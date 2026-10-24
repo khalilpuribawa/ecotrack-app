@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Tantangan: ' . $challenge->title)
+@section('title', 'Challenge Details: ' . $challenge->title)
 
 @section('content')
 <style>
-/* Custom styles untuk enhancement */
+/* Custom styles */
 .challenge-header {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     border-radius: 20px 20px 0 0;
@@ -80,7 +80,7 @@
 </style>
 
 <div class="container py-4">
-    {{-- Notifikasi Sukses/Error --}}
+    {{-- Alerts --}}
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show rounded-4 border-0 shadow-sm" role="alert">
         <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
@@ -110,20 +110,20 @@
                 <div class="col-lg-4 text-lg-end">
                     <div class="info-badge text-center">
                         <div class="fs-2 fw-bold">{{ $challenge->point_reward }}</div>
-                        <small class="opacity-90">Poin Reward</small>
+                        <small class="opacity-90">Reward Points</small>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="card-body p-4">
-            {{-- Detail Informasi --}}
+            {{-- Details Section --}}
             <div class="row g-4 mb-4">
                 <div class="col-md-6">
                     <div class="d-flex align-items-center p-3 bg-light rounded-3">
                         <div class="fs-3 me-3">📅</div>
                         <div>
-                            <h6 class="mb-1 fw-semibold">Periode Tantangan</h6>
+                            <h6 class="mb-1 fw-semibold">Challenge Period</h6>
                             <p class="mb-0 text-muted">
                                 {{ $challenge->start_date->format('d M Y') }} -
                                 {{ $challenge->end_date->format('d M Y') }}
@@ -135,9 +135,9 @@
                     <div class="d-flex align-items-center p-3 bg-light rounded-3">
                         <div class="fs-3 me-3">🎖️</div>
                         <div>
-                            <h6 class="mb-1 fw-semibold">Hadiah Poin</h6>
+                            <h6 class="mb-1 fw-semibold">Point Reward</h6>
                             <span class="badge bg-success fs-6 px-3 py-2 rounded-pill">{{ $challenge->point_reward }}
-                                Poin</span>
+                                Points</span>
                         </div>
                     </div>
                 </div>
@@ -147,9 +147,9 @@
                         class="d-flex align-items-center p-3 bg-warning bg-opacity-10 rounded-3 border border-warning border-opacity-25">
                         <div class="fs-3 me-3">🏅</div>
                         <div>
-                            <h6 class="mb-1 fw-semibold text-warning-emphasis">Badge Eksklusif</h6>
+                            <h6 class="mb-1 fw-semibold text-warning-emphasis">Exclusive Badge</h6>
                             <p class="mb-0 text-warning-emphasis">
-                                Dapatkan badge "{{ ucwords(str_replace('-', ' ', $challenge->badge)) }}"
+                                Earn the "{{ ucwords(str_replace('-', ' ', $challenge->badge)) }}" badge
                             </p>
                         </div>
                     </div>
@@ -159,19 +159,18 @@
 
             {{-- Status Section --}}
             @if($participation)
-            {{-- >>> PENGGUNA SUDAH BERGABUNG <<< --}}
+            {{-- >>> USER ALREADY JOINED <<< --}}
 
             @if ($participation->pivot->status == 'rejected')
-            {{-- Status: Ditolak --}}
+            {{-- Status: Rejected --}}
             <div class="status-card bg-danger bg-opacity-10 border border-danger border-opacity-25 p-4 mb-4">
                 <div class="text-center">
                     <div class="fs-1 text-danger mb-3">❌</div>
-                    <h4 class="text-danger-emphasis fw-bold mb-3">Submission Ditolak</h4>
-                    <p class="text-danger-emphasis mb-3">Maaf, bukti yang Anda kirimkan sebelumnya tidak valid. Silakan
-                        coba lagi dengan bukti yang lebih jelas.</p>
+                    <h4 class="text-danger-emphasis fw-bold mb-3">Submission Rejected</h4>
+                    <p class="text-danger-emphasis mb-3">Sorry, your previously submitted proof was rejected. Please try again with clearer proof.</p>
                     @if($participation->pivot->admin_feedback)
                     <div class="alert alert-danger border-0 rounded-3">
-                        <h6 class="fw-semibold mb-2">💬 Catatan dari Admin:</h6>
+                        <h6 class="fw-semibold mb-2">💬 Admin Feedback:</h6>
                         <p class="mb-0">{{ $participation->pivot->admin_feedback }}</p>
                     </div>
                     @endif
@@ -180,12 +179,12 @@
             @endif
 
             @if (in_array($participation->pivot->status, ['joined', 'rejected']))
-            {{-- Status: Form Upload --}}
+            {{-- Status: Upload Form --}}
             <div class="status-card bg-primary bg-opacity-5 border border-primary border-opacity-25 p-4">
                 <div class="text-center mb-4">
                     <div class="fs-1 mb-3">📸</div>
-                    <h4 class="text-primary-emphasis fw-bold mb-2">Upload Bukti Partisipasi</h4>
-                    <p class="text-muted">Unggah foto yang menunjukkan Anda telah menyelesaikan tantangan ini</p>
+                    <h4 class="text-primary-emphasis fw-bold mb-2">Upload Proof of Participation</h4>
+                    <p class="text-muted">Upload a clear photo showing you have completed this challenge</p>
                 </div>
 
                 <form action="{{ route('challenges.submitProof', $challenge->id) }}" method="POST"
@@ -193,8 +192,8 @@
                     @csrf
                     <div class="upload-area text-center mb-4">
                         <div class="fs-2 text-success mb-3">📁</div>
-                        <h6 class="fw-semibold mb-2">Pilih Foto Bukti</h6>
-                        <p class="text-muted small mb-3">Format: JPG, PNG • Maksimal: 2MB</p>
+                        <h6 class="fw-semibold mb-2">Choose Proof Photo</h6>
+                        <p class="text-muted small mb-3">Format: JPG, PNG • Max size: 2MB</p>
                         <input class="form-control form-control-lg @error('proof_image') is-invalid @enderror"
                             type="file" id="proof_image" name="proof_image" required accept="image/*">
                         @error('proof_image')
@@ -203,42 +202,40 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-modern btn-lg px-5">
-                            <i class="fas fa-upload me-2"></i>Submit Bukti
+                            <i class="fas fa-upload me-2"></i>Submit Proof
                         </button>
                     </div>
                 </form>
             </div>
 
             @elseif ($participation->pivot->status == 'submitted')
-            {{-- Status: Menunggu Review --}}
+            {{-- Status: Under Review --}}
             <div class="status-card bg-warning bg-opacity-10 border border-warning border-opacity-25 p-4">
                 <div class="text-center">
                     <div class="fs-1 text-warning mb-3">⏳</div>
-                    <h4 class="text-warning-emphasis fw-bold mb-3">Menunggu Review</h4>
-                    <p class="text-warning-emphasis mb-4">Bukti Anda sudah diterima dan sedang direview oleh admin.
-                        Terima kasih atas partisipasi Anda!</p>
+                    <h4 class="text-warning-emphasis fw-bold mb-3">Under Review</h4>
+                    <p class="text-warning-emphasis mb-4">Your proof has been submitted and is currently being reviewed by an admin. Thank you for taking action!</p>
 
                     <div class="progress-indicator mb-3">
                         <div class="progress-bar-custom bg-warning" style="width: 75%"></div>
                     </div>
-                    <small class="text-muted">Status: Menunggu Persetujuan Admin</small>
+                    <small class="text-muted">Status: Pending Admin Approval</small>
                 </div>
             </div>
 
             @elseif ($participation->pivot->status == 'completed')
-            {{-- Status: Selesai --}}
+            {{-- Status: Completed --}}
             <div class="status-card bg-success bg-opacity-10 border border-success border-opacity-25 p-4">
                 <div class="text-center">
                     <div class="fs-1 mb-3">🎉</div>
-                    <h4 class="text-success-emphasis fw-bold mb-3">Selamat! Tantangan Berhasil Diselesaikan!</h4>
-                    <p class="text-success-emphasis mb-4">Anda telah berhasil menyelesaikan tantangan ini. Poin dan
-                        badge (jika ada) telah ditambahkan ke akun Anda.</p>
+                    <h4 class="text-success-emphasis fw-bold mb-3">Congratulations! Challenge Completed!</h4>
+                    <p class="text-success-emphasis mb-4">You have successfully completed this challenge. Points and badge (if applicable) have been added to your profile.</p>
 
                     <div class="row g-3 justify-content-center">
                         <div class="col-auto">
                             <div class="bg-success bg-opacity-20 rounded-3 p-3">
                                 <div class="fs-4 text-success">+{{ $challenge->point_reward }}</div>
-                                <small class="text-success-emphasis">Poin Earned</small>
+                                <small class="text-success-emphasis">Points Earned</small>
                             </div>
                         </div>
                         @if($challenge->badge)
@@ -254,23 +251,23 @@
                     <div class="progress-indicator mt-4 mb-3">
                         <div class="progress-bar-custom bg-success" style="width: 100%"></div>
                     </div>
-                    <small class="text-success-emphasis fw-semibold">Status: Selesai ✓</small>
+                    <small class="text-success-emphasis fw-semibold">Status: Completed ✓</small>
                 </div>
             </div>
             @endif
 
             @else
-            {{-- >>> PENGGUNA BELUM BERGABUNG <<< --}}
+            {{-- >>> USER NOT JOINED <<< --}}
             <div class="status-card bg-light border-0 p-5">
                 <div class="text-center">
                     <div class="fs-1 text-primary mb-4">🚀</div>
-                    <h4 class="fw-bold mb-3">Siap Mengambil Tantangan?</h4>
-                    <p class="text-muted mb-4 fs-5">Bergabunglah sekarang dan mulai perjalanan hijau Anda!</p>
+                    <h4 class="fw-bold mb-3">Ready to Take on the Challenge?</h4>
+                    <p class="text-muted mb-4 fs-5">Join now and start your green journey towards a cleaner planet!</p>
 
                     <form action="{{ route('challenges.participate', $challenge) }}" method="POST" class="d-inline">
                         @csrf
                         <button type="submit" class="btn btn-success btn-modern btn-lg px-5 py-3">
-                            <i class="fas fa-play me-2"></i>Ikuti Tantangan Ini!
+                            <i class="fas fa-play me-2"></i>Join This Challenge!
                         </button>
                     </form>
                 </div>
@@ -281,7 +278,7 @@
         <div class="card-footer bg-light border-0 p-4">
             <div class="text-center">
                 <a href="{{ route('challenges.index') }}" class="btn btn-outline-secondary btn-modern px-4">
-                    <i class="fas fa-arrow-left me-2"></i>Kembali ke Daftar Tantangan
+                    <i class="fas fa-arrow-left me-2"></i>Back to Challenges
                 </a>
             </div>
         </div>
@@ -300,7 +297,7 @@ document.getElementById('proof_image')?.addEventListener('change', function(e) {
         // Show file name
         const fileName = document.createElement('small');
         fileName.className = 'text-success fw-semibold d-block mt-2';
-        fileName.textContent = `File dipilih: ${file.name}`;
+        fileName.textContent = `Selected file: ${file.name}`;
 
         // Remove previous file name if exists
         const existingFileName = uploadArea.querySelector('.file-name');

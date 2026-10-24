@@ -45,6 +45,6 @@ class ArticleController extends Controller
             'created_by' => Auth::id(),
         ]);
 
-        return redirect()->route('articles.index')->with('success', 'Artikel berhasil dipublikasikan.');
+        return redirect()->route('articles.index')->with('success', 'Article published successfully.');
     }
 }

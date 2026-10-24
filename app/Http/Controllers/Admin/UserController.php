@@ -42,13 +42,13 @@ public function index()
         
         // Jangan biarkan admin terakhir menghapus rolenya sendiri
         if ($user->id === auth()->id() && $request->role === 'user') {
-            return back()->with('error', 'Anda tidak bisa mengubah role Anda sendiri.');
+            return back()->with('error', 'You cannot change your own role.');
         }
 
         $user->role = $request->role;
         $user->save();
 
-        return back()->with('success', 'Role pengguna berhasil diperbarui.');
+        return back()->with('success', 'User role updated successfully.');
     }
 
     public function store(Request $request)
@@ -72,6 +72,6 @@ public function index()
 
     // 3. Arahkan kembali ke halaman daftar dengan pesan sukses
     return redirect()->route('admin.users.index')
-                     ->with('success', 'Pengguna baru berhasil ditambahkan.');
+                     ->with('success', 'New user added successfully.');
 }
 }

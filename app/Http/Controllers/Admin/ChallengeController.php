@@ -52,7 +52,7 @@ public function create()
 
         // 3. Redirect kembali ke halaman daftar dengan pesan sukses
         return redirect()->route('admin.challenges.index')
-                         ->with('success', 'Tantangan baru berhasil dibuat!');
+                         ->with('success', 'New challenge created successfully!');
     }
 
      public function reviewSubmissions(Challenge $challenge)
@@ -103,7 +103,7 @@ public function update(Request $request, Challenge $challenge)
 
     // 3. Redirect kembali ke halaman daftar dengan pesan sukses.
     return redirect()->route('admin.challenges.index')
-                     ->with('success', 'Tantangan berhasil diperbarui!');
+                     ->with('success', 'Challenge updated successfully!');
 }
 
 // ... (method lain seperti update, destroy) ...
@@ -119,10 +119,10 @@ public function update(Request $request, Challenge $challenge)
             // Tambah poin ke user
             $user->increment('points', $challenge->point_reward);
             DB::commit();
-            return back()->with('success', "Submission dari {$user->name} berhasil disetujui.");
+            return back()->with('success', "Submission from {$user->name} approved successfully.");
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Gagal memproses: ' . $e->getMessage());
+            return back()->with('error', 'Failed to process: ' . $e->getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ public function update(Request $request, Challenge $challenge)
             'admin_feedback' => $request->admin_feedback,
         ]);
         
-        return back()->with('success', "Submission dari {$user->name} telah ditolak.");
+        return back()->with('success', "Submission from {$user->name} has been rejected.");
     }
 
     public function destroy(string $id)
@@ -152,6 +152,6 @@ public function update(Request $request, Challenge $challenge)
 
     // 3. Arahkan kembali ke halaman index dengan pesan sukses.
     return redirect()->route('admin.challenges.index')
-                     ->with('success', 'Tantangan berhasil dihapus.');
+                     ->with('success', 'Challenge deleted successfully.');
 }
 }

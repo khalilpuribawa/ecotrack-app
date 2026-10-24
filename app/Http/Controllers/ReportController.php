@@ -46,7 +46,7 @@ class ReportController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('reports.index')->with('success', 'Laporan berhasil dikirim dan menunggu verifikasi.');
+        return redirect()->route('reports.index')->with('success', 'Report submitted successfully and is pending verification.');
     }
     
     // Menampilkan detail satu laporan

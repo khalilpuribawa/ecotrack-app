@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -42,7 +42,7 @@
 <body>
     <div class="sidebar d-flex flex-column p-3">
         <a href="{{ route('admin.dashboard') }}" class="navbar-brand text-white fs-4 mb-4">
-            🌱 Admin EcoTrack
+            🌱 EcoTrack Admin
         </a>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item"><a href="{{ route('admin.dashboard') }}"
@@ -50,16 +50,16 @@
                         class="bi bi-speedometer2"></i> Dashboard</a></li>
             <li class="nav-item"><a href="{{ route('admin.reports.index') }}"
                     class="nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}"><i
-                        class="bi bi-flag"></i> Laporan</a></li>
+                        class="bi bi-flag"></i> Reports</a></li>
             <li class="nav-item"><a href="{{ route('admin.green-points.index') }}"
                     class="nav-link {{ request()->routeIs('admin.green-points.*') ? 'active' : '' }}"><i
-                        class="bi bi-geo-alt"></i> Titik Hijau</a></li>
+                        class="bi bi-geo-alt"></i> Green Spots</a></li>
             <li class="nav-item"><a href="{{ route('admin.challenges.index') }}"
                     class="nav-link {{ request()->routeIs('admin.challenges.*') ? 'active' : '' }}"><i
-                        class="bi bi-trophy"></i> Tantangan</a></li>
+                        class="bi bi-trophy"></i> Challenges</a></li>
             <li class="nav-item"><a href="{{ route('admin.users.index') }}"
                     class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"><i
-                        class="bi bi-people"></i> Pengguna</a></li>
+                        class="bi bi-people"></i> Users</a></li>
         </ul>
         <hr>
         <div class="dropdown">
@@ -68,14 +68,14 @@
                 <strong>{{ Auth::user()->name }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="{{ route('dashboard') }}">Lihat Situs</a></li>
+                <li><a class="dropdown-item" href="{{ route('dashboard') }}">View Public Site</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="dropdown-item">Logout</button>
+                        <button type="submit" class="dropdown-item">Sign Out</button>
                     </form>
                 </li>
             </ul>

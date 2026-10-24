@@ -1,17 +1,21 @@
-@extends('admin.layouts.app') {{-- Sesuaikan dengan layout admin Anda --}}
-@section('title', 'Buat Tantangan Baru')
+@extends('admin.layouts.app')
+@section('title', 'Create New Challenge')
 
 @section('content')
-<div class="container">
-    <h1 class="h3 mb-4">Buat Tantangan Baru</h1>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 fw-bold mb-0">Create New Challenge</h1>
+        <a href="{{ route('admin.challenges.index') }}" class="btn btn-outline-secondary rounded-pill px-4">
+            <i class="fas fa-arrow-left me-1"></i>Back
+        </a>
+    </div>
 
-    <div class="card shadow">
-        <div class="card-body">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
 
-            {{-- Tampilkan error validasi jika ada --}}
             @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
+            <div class="alert alert-danger rounded-4">
+                <ul class="mb-0">
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                     @endforeach
@@ -22,52 +26,44 @@
             <form action="{{ route('admin.challenges.store') }}" method="POST">
                 @csrf
 
-                {{-- Judul Tantangan --}}
                 <div class="mb-3">
-                    <label for="title" class="form-label">Judul Tantangan</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
+                    <label for="title" class="form-label fw-semibold">Challenge Title</label>
+                    <input type="text" class="form-control rounded-3" id="title" name="title" value="{{ old('title') }}" placeholder="e.g., 7 Days Without Single-Use Plastic" required>
                 </div>
 
-                {{-- Deskripsi --}}
                 <div class="mb-3">
-                    <label for="description" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="description" name="description" rows="5"
-                        required>{{ old('description') }}</textarea>
+                    <label for="description" class="form-label fw-semibold">Description</label>
+                    <textarea class="form-control rounded-3" id="description" name="description" rows="5" placeholder="Detail instructions and criteria for completing this challenge..." required>{{ old('description') }}</textarea>
                 </div>
 
-                {{-- Hadiah Poin --}}
                 <div class="mb-3">
-                    <label for="point_reward" class="form-label">Hadiah Poin</label>
-                    <input type="number" class="form-control" id="point_reward" name="point_reward"
-                        value="{{ old('point_reward') }}" required>
+                    <label for="point_reward" class="form-label fw-semibold">Reward Points</label>
+                    <input type="number" class="form-control rounded-3" id="point_reward" name="point_reward" value="{{ old('point_reward') }}" placeholder="e.g., 50" required>
                 </div>
 
-                {{-- Periode --}}
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="start_date" class="form-label">Tanggal Mulai</label>
-                        <input type="date" class="form-control" id="start_date" name="start_date"
-                            value="{{ old('start_date') }}" required>
+                        <label for="start_date" class="form-label fw-semibold">Start Date</label>
+                        <input type="date" class="form-control rounded-3" id="start_date" name="start_date" value="{{ old('start_date') }}" required>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="end_date" class="form-label">Tanggal Selesai</label>
-                        <input type="date" class="form-control" id="end_date" name="end_date"
-                            value="{{ old('end_date') }}" required>
+                        <label for="end_date" class="form-label fw-semibold">End Date</label>
+                        <input type="date" class="form-control rounded-3" id="end_date" name="end_date" value="{{ old('end_date') }}" required>
                     </div>
                 </div>
 
-                {{-- Badge (Opsional) --}}
-                <div class="mb-3">
-                    <label for="badge" class="form-label">Nama Badge (Opsional)</label>
-                    <input type="text" class="form-control" id="badge" name="badge" value="{{ old('badge') }}"
-                        placeholder="Contoh: no-straw-hero">
-                    <small class="form-text text-muted">Gunakan format slug (huruf kecil, tanpa spasi, gunakan strip).
-                        Contoh: 'pejuang-tanpa-plastik'.</small>
+                <div class="mb-4">
+                    <label for="badge" class="form-label fw-semibold">Badge Name (Optional)</label>
+                    <input type="text" class="form-control rounded-3" id="badge" name="badge" value="{{ old('badge') }}" placeholder="e.g., zero-waste-hero">
+                    <small class="form-text text-muted">Use slug format (lowercase, no spaces, use hyphens). Example: 'zero-waste-champion'.</small>
                 </div>
 
-                <hr>
-                <button type="submit" class="btn btn-primary">Simpan Tantangan</button>
-                <a href="{{ route('admin.challenges.index') }}" class="btn btn-secondary">Batal</a>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success rounded-pill px-4">
+                        <i class="fas fa-save me-1"></i>Save Challenge
+                    </button>
+                    <a href="{{ route('admin.challenges.index') }}" class="btn btn-outline-secondary rounded-pill px-4">Cancel</a>
+                </div>
             </form>
         </div>
     </div>

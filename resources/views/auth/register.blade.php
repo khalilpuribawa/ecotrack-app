@@ -533,10 +533,10 @@ body {
         <!-- Header -->
         <div class="register-header">
             <div class="eco-badge">
-                🌱 Bergabung dengan Komunitas
+                🌱 Join the Community
             </div>
-            <h1 class="register-title">Daftar ke EcoTrack.ID</h1>
-            <p class="register-subtitle">Mulai perjalanan hijau Anda bersama kami</p>
+            <h1 class="register-title">Create Your EcoTrack.ID Account</h1>
+            <p class="register-subtitle">Start your green journey with us today</p>
         </div>
 
         <!-- Body -->
@@ -548,11 +548,11 @@ body {
                 <div class="form-row">
                     <!-- Name Field -->
                     <div class="form-group-modern">
-                        <label for="name" class="form-label-modern">Nama Lengkap</label>
+                        <label for="name" class="form-label-modern">Full Name</label>
                         <div class="input-wrapper">
                             <input id="name" type="text" class="form-control-modern @error('name') is-invalid @enderror"
                                 name="name" value="{{ old('name') }}" required autofocus
-                                placeholder="Masukkan nama lengkap">
+                                placeholder="Enter your full name">
                             <i class="fas fa-user input-icon"></i>
                         </div>
                         @error('name')
@@ -565,11 +565,11 @@ body {
 
                     <!-- Email Field -->
                     <div class="form-group-modern">
-                        <label for="email" class="form-label-modern">Alamat Email</label>
+                        <label for="email" class="form-label-modern">Email Address</label>
                         <div class="input-wrapper">
                             <input id="email" type="email"
                                 class="form-control-modern @error('email') is-invalid @enderror" name="email"
-                                value="{{ old('email') }}" required placeholder="Masukkan email Anda">
+                                value="{{ old('email') }}" required placeholder="Enter your email address">
                             <i class="fas fa-envelope input-icon"></i>
                         </div>
                         @error('email')
@@ -588,7 +588,7 @@ body {
                         <div class="input-wrapper">
                             <input id="password" type="password"
                                 class="form-control-modern @error('password') is-invalid @enderror" name="password"
-                                required placeholder="Masukkan password" onkeyup="checkPasswordStrength()">
+                                required placeholder="Enter password" onkeyup="checkPasswordStrength()">
                             <i class="fas fa-lock input-icon"></i>
                             <button type="button" class="password-toggle"
                                 onclick="togglePassword('password', 'passwordIcon')">
@@ -599,7 +599,7 @@ body {
                             <div class="strength-bar">
                                 <div class="strength-fill" id="strengthFill"></div>
                             </div>
-                            <small id="strengthText" class="text-muted">Masukkan password untuk melihat kekuatan</small>
+                            <small id="strengthText" class="text-muted">Enter a password to check its strength</small>
                         </div>
                         @error('password')
                         <div class="invalid-feedback">
@@ -611,10 +611,10 @@ body {
 
                     <!-- Password Confirmation Field -->
                     <div class="form-group-modern">
-                        <label for="password-confirm" class="form-label-modern">Konfirmasi Password</label>
+                        <label for="password-confirm" class="form-label-modern">Confirm Password</label>
                         <div class="input-wrapper">
                             <input id="password-confirm" type="password" class="form-control-modern"
-                                name="password_confirmation" required placeholder="Konfirmasi password"
+                                name="password_confirmation" required placeholder="Confirm your password"
                                 onkeyup="checkPasswordMatch()">
                             <i class="fas fa-lock input-icon"></i>
                             <button type="button" class="password-toggle"
@@ -631,8 +631,8 @@ body {
                     <div class="terms-check">
                         <input type="checkbox" id="terms" name="terms" required class="form-check-input">
                         <label for="terms" class="form-check-label">
-                            Saya setuju dengan <a href="#" class="terms-link">Syarat & Ketentuan</a>
-                            dan <a href="#" class="terms-link">Kebijakan Privasi</a> EcoTrack.ID
+                            I agree to the <a href="#" class="terms-link">Terms of Service</a>
+                            and <a href="#" class="terms-link">Privacy Policy</a> of EcoTrack.ID
                         </label>
                     </div>
                 </div>
@@ -643,7 +643,7 @@ body {
                         <div class="loading-spinner"></div>
                         <span class="btn-text">
                             <i class="fas fa-user-plus"></i>
-                            Daftar Sekarang
+                            Register Now
                         </span>
                     </button>
                 </div>
@@ -651,7 +651,7 @@ body {
 
             <!-- Divider -->
             <div class="divider">
-                <span>atau daftar dengan</span>
+                <span>or register with</span>
             </div>
 
             <!-- Social Login -->
@@ -670,8 +670,8 @@ body {
             <div class="login-link">
                 <p class="mb-0">
                     <i class="fas fa-sign-in-alt me-2" style="color: #10b981;"></i>
-                    Sudah punya akun?
-                    <a href="{{ route('login') }}">Login di sini dan lanjutkan perjalanan hijau Anda!</a>
+                    Already have an account?
+                    <a href="{{ route('login') }}">Sign in here and continue your green journey!</a>
                 </p>
             </div>
         </div>
@@ -751,10 +751,10 @@ function checkPasswordMatch() {
         matchText.textContent = '';
         matchText.className = 'text-muted';
     } else if (password === confirmPassword) {
-        matchText.textContent = '✓ Password cocok';
+        matchText.textContent = '✓ Passwords match';
         matchText.className = 'text-success';
     } else {
-        matchText.textContent = '✗ Password tidak cocok';
+        matchText.textContent = '✗ Passwords do not match';
         matchText.className = 'text-danger';
     }
 }

@@ -19,30 +19,30 @@ class EcoTrackSeeder extends Seeder
 
         // --- Seed Articles ---
         Article::create([
-            'title' => '5 Cara Mudah Mengurangi Sampah Plastik di Rumah',
-            'content' => 'Mengurangi sampah plastik adalah langkah kecil dengan dampak besar. Mulailah dengan membawa tas belanja sendiri, menggunakan botol minum isi ulang, dan menghindari sedotan plastik. Setiap tindakan kecil berarti!',
+            'title' => '5 Easy Ways to Reduce Single-Use Plastic at Home',
+            'content' => 'Cutting down on plastic waste is a simple habit with massive global impact. Start by bringing your reusable shopping tote, carrying a refillable water bottle, and refusing single-use straws. Every small step counts towards a cleaner planet!',
             'type' => 'article',
             'created_by' => $admin->id,
         ]);
         Article::create([
-            'title' => 'Cara Membuat Kompos dari Sampah Dapur',
-            'content' => 'Jangan buang sisa sayuran dan buah! Anda bisa mengubahnya menjadi kompos yang subur untuk tanaman Anda. Prosesnya mudah dan sangat bermanfaat untuk mengurangi sampah organik yang berakhir di TPA.',
+            'title' => 'How to Make Nutrient-Rich Compost from Kitchen Scraps',
+            'content' => 'Do not throw away fruit peels and vegetable cuttings! Transform kitchen leftovers into nutrient-packed organic compost for your plants. It is simple, free, and significantly reduces municipal landfill waste.',
             'type' => 'article',
             'created_by' => $admin->id,
         ]);
 
         // --- Seed Challenges ---
         Challenge::create([
-            'title' => 'Tantangan 7 Hari Tanpa Sedotan Plastik',
-            'description' => 'Beranikan diri untuk tidak menggunakan sedotan plastik sama sekali selama seminggu penuh. Upload foto minumanmu tanpa sedotan untuk menyelesaikan tantangan!',
+            'title' => '7-Day Zero Plastic Straw Challenge',
+            'description' => 'Commit to going 100% plastic straw-free for an entire week. Snap and upload a photo of your straw-free drink to complete the challenge and earn your badge!',
             'start_date' => now()->startOfWeek(),
             'end_date' => now()->endOfWeek(),
             'point_reward' => 50,
             'badge' => 'no-straw-hero',
         ]);
         Challenge::create([
-            'title' => 'Tanam Satu Pohon di Rumahmu',
-            'description' => 'Tanam pohon atau tanaman apa saja di pekarangan, pot, atau bahkan di dalam ruangan. Setiap tanaman membantu menghasilkan oksigen.',
+            'title' => 'Plant a Tree or Houseplant',
+            'description' => 'Plant a sapling, balcony houseplant, or backyard garden tree. Every new green plant purifies our air and captures carbon dioxide.',
             'start_date' => now(),
             'end_date' => now()->addMonth(),
             'point_reward' => 100,
@@ -52,16 +52,16 @@ class EcoTrackSeeder extends Seeder
         // --- Seed Reports ---
         Report::create([
             'user_id' => $users->random()->id,
-            'category' => 'Sampah menumpuk',
-            'description' => 'Ada tumpukan sampah liar di pinggir Jalan Merdeka, dekat jembatan.',
+            'category' => 'Illegal Waste Dumping',
+            'description' => 'Large pile of discarded plastic bags and industrial trash accumulated along the riverbank near the main bridge.',
             'latitude' => -6.2297,
             'longitude' => 106.829,
             'status' => 'pending',
         ]);
         Report::create([
             'user_id' => $users->random()->id,
-            'category' => 'Penebangan pohon liar',
-            'description' => 'Terlihat ada aktivitas penebangan pohon tanpa izin di area taman kota.',
+            'category' => 'Unauthorized Tree Cutting',
+            'description' => 'Unauthorized logging activity observed damaging protected urban park greenery.',
             'latitude' => -6.2088,
             'longitude' => 106.8456,
             'status' => 'verified',
@@ -69,18 +69,18 @@ class EcoTrackSeeder extends Seeder
 
         // --- Seed Green Points ---
         GreenPoint::create([
-            'type' => 'Bank Sampah',
-            'name' => 'Bank Sampah Maju Bersama',
-            'description' => 'Menerima sampah plastik, kertas, dan logam. Buka setiap hari Sabtu.',
+            'type' => 'Recycling Station',
+            'name' => 'EcoHub Community Recycling Drop-off',
+            'description' => 'Accepts clean plastics, cardboard, and electronic recyclables. Open every Saturday from 8 AM to 4 PM.',
             'latitude' => -6.2146,
             'longitude' => 106.8451,
             'added_by' => $admin->id,
             'verified' => true,
         ]);
         GreenPoint::create([
-            'type' => 'Taman Kota',
-            'name' => 'Taman Kota Sejuk Asri',
-            'description' => 'Taman publik dengan jogging track dan area bermain anak.',
+            'type' => 'Urban Eco Park',
+            'name' => 'Breeze Botanical City Park',
+            'description' => 'Public botanical sanctuary featuring solar-lit jogging trails and community tree nurseries.',
             'latitude' => -6.1751,
             'longitude' => 106.8650,
             'added_by' => $admin->id,
@@ -89,8 +89,8 @@ class EcoTrackSeeder extends Seeder
         
         // --- Seed Communities ---
         $community = Community::create([
-            'name' => 'Komunitas Peduli Sungai Ciliwung',
-            'description' => 'Grup untuk warga yang ingin berpartisipasi dalam kegiatan bersih-bersih Sungai Ciliwung.',
+            'name' => 'Clean River Action Alliance',
+            'description' => 'A passionate group of community volunteers organizing weekly river cleanup drives and water testing.',
             'created_by' => $users->first()->id,
         ]);
         $community->members()->attach($users->first()->id, ['role' => 'admin']);

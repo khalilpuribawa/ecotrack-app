@@ -39,13 +39,13 @@ class ChallengeController extends Controller
 
         // Cek jika pengguna sudah pernah ikut tantangan ini sebelumnya
         if ($user->challenges()->where('challenge_id', $challenge->id)->exists()) {
-            return back()->with('error', 'Anda sudah mengikuti tantangan ini.');
+            return back()->with('error', 'You have already joined this challenge.');
         }
 
         // Daftarkan pengguna ke tantangan dengan status 'joined'
         $user->challenges()->attach($challenge->id, ['status' => 'joined']);
         
-        return redirect()->route('challenges.show', $challenge)->with('success', 'Anda berhasil bergabung dengan tantangan!');
+        return redirect()->route('challenges.show', $challenge)->with('success', 'You have successfully joined the challenge!');
     }
 
     /**
@@ -72,7 +72,7 @@ class ChallengeController extends Controller
         ]);
 
         // 5. Arahkan kembali pengguna dengan pesan sukses.
-        return back()->with('success', 'Bukti berhasil di-submit! Mohon tunggu review dari admin.');
+        return back()->with('success', 'Proof submitted successfully! Please wait for admin review.');
     }
 
 } // <- Ini adalah penutup dari 'class ChallengeController'

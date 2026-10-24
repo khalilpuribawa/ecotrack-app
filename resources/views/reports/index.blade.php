@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Peta Laporan Lingkungan - EcoTrack.ID')
+@section('title', 'Environmental Reports Map - EcoTrack.ID')
 
 @section('content')
 <style>
@@ -506,31 +506,31 @@
         <div class="hero-badge">
             🌍 Real-time Environmental Monitoring
         </div>
-        <h1 class="hero-title">Peta Laporan Lingkungan</h1>
+        <h1 class="hero-title">Environmental Reports Map</h1>
         <p class="hero-subtitle">
-            Pantau dan lihat laporan masalah lingkungan dari komunitas secara real-time.
-            Bersama-sama kita ciptakan lingkungan yang lebih bersih dan sehat.
+            Track and monitor community environmental reports in real time.
+            Together, let's create a cleaner, healthier, and greener planet.
         </p>
         <div class="hero-stats">
             <div class="stat-item">
                 <i class="fas fa-map-marker-alt"></i>
                 <div>
                     <div class="stat-number">{{ count($reports) }}</div>
-                    <div class="stat-label">Total Laporan</div>
+                    <div class="stat-label">Total Reports</div>
                 </div>
             </div>
             <div class="stat-item">
                 <i class="fas fa-users"></i>
                 <div>
                     <div class="stat-number">{{ collect($reports)->pluck('user.id')->unique()->count() }}</div>
-                    <div class="stat-label">Kontributor Aktif</div>
+                    <div class="stat-label">Active Contributors</div>
                 </div>
             </div>
             <div class="stat-item">
                 <i class="fas fa-clock"></i>
                 <div>
                     <div class="stat-number">24/7</div>
-                    <div class="stat-label">Monitoring</div>
+                    <div class="stat-label">Live Monitoring</div>
                 </div>
             </div>
         </div>
@@ -542,12 +542,12 @@
     <div class="map-header">
         <h3 class="map-title">
             <i class="fas fa-globe-americas"></i>
-            Peta Interaktif
+            Interactive Map
         </h3>
         <div class="map-controls">
             <button class="control-btn" id="locateBtn">
                 <i class="fas fa-crosshairs"></i>
-                Lokasi Saya
+                My Location
             </button>
             <button class="control-btn" id="refreshBtn">
                 <i class="fas fa-sync-alt"></i>
@@ -564,7 +564,7 @@
         <div class="map-loading" id="mapLoading">
             <div class="loading-content">
                 <div class="loading-spinner"></div>
-                <p>Memuat peta dan data laporan...</p>
+                <p>Loading map and report data...</p>
             </div>
         </div>
 
@@ -572,26 +572,26 @@
         <div class="map-legend">
             <div class="legend-title">
                 <i class="fas fa-info-circle"></i>
-                Keterangan
+                Legend
             </div>
             <div class="legend-item">
                 <div class="legend-color user"></div>
-                <span>Lokasi Anda</span>
+                <span>Your Location</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color report"></div>
-                <span>Laporan Masalah</span>
+                <span>Reported Issue</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color resolved"></div>
-                <span>Masalah Teratasi</span>
+                <span>Resolved Issue</span>
             </div>
         </div>
 
         <!-- Location Status -->
         <div class="location-status" id="locationStatus">
             <div class="location-icon inactive" id="locationIcon"></div>
-            <span id="locationText">Mendeteksi lokasi...</span>
+            <span id="locationText">Detecting location...</span>
         </div>
     </div>
 </div>
@@ -601,14 +601,13 @@
     <div class="action-icon">
         <i class="fas fa-plus"></i>
     </div>
-    <h3 class="action-title">Laporkan Masalah Lingkungan</h3>
+    <h3 class="action-title">Report an Environmental Issue</h3>
     <p class="action-subtitle">
-        Temukan masalah lingkungan di sekitar Anda? Laporkan sekarang dan bantu komunitas untuk mengatasinya
-        bersama-sama.
+        Spotted illegal waste, pollution, or environmental damage? Report now and help our community resolve it together.
     </p>
     <a href="{{ route('reports.create') }}" class="action-btn">
         <i class="fas fa-exclamation-triangle"></i>
-        Buat Laporan Baru
+        Submit New Report
     </a>
 </div>
 @endsection
@@ -662,7 +661,7 @@ function onLocationFound(e) {
             icon: userIcon
         }).addTo(map)
         .bindPopup(
-            '<div class="popup-title">📍 Lokasi Anda</div><div class="popup-description">Anda berada di sekitar area ini</div>'
+            '<div class="popup-title">📍 Your Location</div><div class="popup-description">You are in this vicinity</div>'
             );
 
     userCircle = L.circle(e.latlng, {
@@ -674,7 +673,7 @@ function onLocationFound(e) {
     }).addTo(map);
 
     // Update location status
-    updateLocationStatus(true, 'Lokasi terdeteksi');
+    updateLocationStatus(true, 'Location detected');
 
     // Hide loading
     hideMapLoading();
@@ -683,9 +682,9 @@ function onLocationFound(e) {
 // Location error handler
 function onLocationError(e) {
     console.log('Location error:', e.message);
-    // Set default view to Jakarta
+    // Set default view
     map.setView([-6.2088, 106.8456], 12);
-    updateLocationStatus(false, 'Gagal mendeteksi lokasi');
+    updateLocationStatus(false, 'Location detection failed');
     hideMapLoading();
 }
 
@@ -728,7 +727,7 @@ const reports = @json($reports);
 reports.forEach(report => {
     const icon = report.status === 'resolved' ? resolvedIcon : reportIcon;
     const statusColor = report.status === 'resolved' ? '#10b981' : '#ef4444';
-    const statusText = report.status === 'resolved' ? 'Teratasi' : 'Belum Teratasi';
+    const statusText = report.status === 'resolved' ? 'Resolved' : 'Pending Resolution';
 
     const marker = L.marker([report.latitude, report.longitude], {
             icon: icon
@@ -739,8 +738,8 @@ reports.forEach(report => {
             <div class="popup-description">${report.description}</div>
             <div class="popup-meta">
                 <strong>Status:</strong> <span style="color: ${statusColor};">${statusText}</span><br>
-                <strong>Dilaporkan oleh:</strong> ${report.user.name}<br>
-                <strong>Tanggal:</strong> ${new Date(report.created_at).toLocaleDateString('id-ID')}
+                <strong>Reported by:</strong> ${report.user.name}<br>
+                <strong>Date:</strong> ${new Date(report.created_at).toLocaleDateString('en-US')}
             </div>
         `);
 
@@ -749,8 +748,8 @@ reports.forEach(report => {
 
 // Control buttons functionality
 document.getElementById('locateBtn').addEventListener('click', function() {
-    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencari...';
-    updateLocationStatus(false, 'Mencari lokasi...');
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Locating...';
+    updateLocationStatus(false, 'Locating position...');
 
     map.locate({
         setView: true,
@@ -760,7 +759,7 @@ document.getElementById('locateBtn').addEventListener('click', function() {
     });
 
     setTimeout(() => {
-        this.innerHTML = '<i class="fas fa-crosshairs"></i> Lokasi Saya';
+        this.innerHTML = '<i class="fas fa-crosshairs"></i> My Location';
     }, 2000);
 });
 

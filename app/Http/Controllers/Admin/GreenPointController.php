@@ -27,12 +27,12 @@ class GreenPointController extends Controller
         $greenPoint->verified = $request->status;
         $greenPoint->save();
         
-        return back()->with('success', 'Status titik hijau berhasil diperbarui.');
+        return back()->with('success', 'Green spot status updated successfully.');
     }
     
     public function destroy(GreenPoint $greenPoint)
     {
         $greenPoint->delete();
-        return back()->with('success', 'Titik hijau berhasil dihapus.');
+        return back()->with('success', 'Green spot deleted successfully.');
     }
 }

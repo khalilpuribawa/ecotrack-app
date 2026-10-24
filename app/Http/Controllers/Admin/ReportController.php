@@ -56,7 +56,7 @@ class ReportController extends Controller
         $report->save();
 
         // Mengarahkan kembali dengan pesan sukses.
-        return back()->with('success', 'Status laporan berhasil diperbarui.');
+        return back()->with('success', 'Report status updated successfully.');
     }
     public function show(Report $report) // <-- Metode 'show' yang hilang
     {
@@ -82,6 +82,6 @@ class ReportController extends Controller
         $report->delete();
 
         // Mengarahkan kembali dengan pesan sukses.
-        return back()->with('success', 'Laporan berhasil dihapus.');
+        return back()->with('success', 'Report deleted successfully.');
     }
 }

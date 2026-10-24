@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Dashboard Admin')
+@section('title', 'Admin Dashboard')
 
 @section('content')
 <style>
@@ -371,8 +371,8 @@
         <div class="dashboard-header">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <h1 class="dashboard-title">👋 Dashboard Admin</h1>
-                    <p class="dashboard-subtitle">Selamat datang di panel kontrol EcoTrack.ID</p>
+                    <h1 class="dashboard-title">👋 Admin Dashboard</h1>
+                    <p class="dashboard-subtitle">Welcome to the EcoTrack.ID centralized control panel</p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
                     <div class="dashboard-date">
@@ -392,11 +392,11 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stats-content">
-                            <div class="stats-label">Total Pengguna</div>
+                            <div class="stats-label">Total Users</div>
                             <div class="stats-number">{{ number_format($stats['total_users']) }}</div>
                             <div class="stats-trend trend-success">
                                 <i class="fas fa-arrow-up"></i>
-                                <span>Aktif & Berkembang</span>
+                                <span>Active & Growing</span>
                             </div>
                         </div>
                     </div>
@@ -410,11 +410,11 @@
                             <i class="fas fa-exclamation-triangle"></i>
                         </div>
                         <div class="stats-content">
-                            <div class="stats-label">Laporan Menunggu</div>
+                            <div class="stats-label">Pending Reports</div>
                             <div class="stats-number">{{ number_format($stats['pending_reports']) }}</div>
                             <div class="stats-trend trend-warning">
                                 <i class="fas fa-clock"></i>
-                                <span>Perlu Verifikasi</span>
+                                <span>Needs Verification</span>
                             </div>
                         </div>
                     </div>
@@ -428,11 +428,11 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="stats-content">
-                            <div class="stats-label">Titik Hijau Menunggu</div>
+                            <div class="stats-label">Pending Green Spots</div>
                             <div class="stats-number">{{ number_format($stats['pending_green_points']) }}</div>
                             <div class="stats-trend trend-info">
                                 <i class="fas fa-hourglass-half"></i>
-                                <span>Dalam Proses</span>
+                                <span>In Review</span>
                             </div>
                         </div>
                     </div>
@@ -446,11 +446,11 @@
                             <i class="fas fa-trophy"></i>
                         </div>
                         <div class="stats-content">
-                            <div class="stats-label">Tantangan Aktif</div>
+                            <div class="stats-label">Active Challenges</div>
                             <div class="stats-number">{{ number_format($stats['active_challenges']) }}</div>
                             <div class="stats-trend trend-success">
                                 <i class="fas fa-play"></i>
-                                <span>Sedang Berjalan</span>
+                                <span>Ongoing</span>
                             </div>
                         </div>
                     </div>
@@ -466,40 +466,40 @@
                         <div class="quick-actions-icon">
                             <i class="fas fa-bolt"></i>
                         </div>
-                        <h2 class="quick-actions-title">Aksi Cepat</h2>
+                        <h2 class="quick-actions-title">Quick Actions</h2>
                     </div>
 
                     <div class="row g-4">
                         <div class="col-lg-3 col-md-6">
-                            <a href="#" class="action-btn primary w-100">
+                            <a href="{{ route('admin.users.index') }}" class="action-btn primary w-100">
                                 <div class="action-icon">
                                     <i class="fas fa-user-plus"></i>
                                 </div>
-                                <span>Tambah Pengguna</span>
+                                <span>Manage Users</span>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <a href="#" class="action-btn warning w-100">
+                            <a href="{{ route('admin.reports.index') }}" class="action-btn warning w-100">
                                 <div class="action-icon">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
-                                <span>Verifikasi Laporan</span>
+                                <span>Verify Reports</span>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <a href="#" class="action-btn info w-100">
+                            <a href="{{ route('admin.green-points.index') }}" class="action-btn info w-100">
                                 <div class="action-icon">
                                     <i class="fas fa-map"></i>
                                 </div>
-                                <span>Kelola Titik Hijau</span>
+                                <span>Manage Green Spots</span>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <a href="#" class="action-btn success w-100">
+                            <a href="{{ route('admin.challenges.create') }}" class="action-btn success w-100">
                                 <div class="action-icon">
                                     <i class="fas fa-plus-circle"></i>
                                 </div>
-                                <span>Buat Tantangan</span>
+                                <span>Create Challenge</span>
                             </a>
                         </div>
                     </div>

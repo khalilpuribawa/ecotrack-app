@@ -449,25 +449,25 @@
 <div class="dashboard-hero">
     <div class="hero-content">
         <div class="welcome-badge">
-            🎉 Selamat Datang Kembali
+            🎉 Welcome Back
         </div>
-        <h1 class="hero-title">Halo, {{ $user->name }}!</h1>
+        <h1 class="hero-title">Hello, {{ $user->name }}!</h1>
         <p class="hero-subtitle">
-            Terima kasih telah menjadi bagian dari komunitas EcoTrack.ID.
-            Mari terus berkontribusi untuk bumi yang lebih hijau dan berkelanjutan.
+            Thank you for being an active part of the EcoTrack.ID community.
+            Let us continue taking action together for a greener and more sustainable earth.
         </p>
         <div class="points-display">
             <i class="fas fa-coins"></i>
-            <span>{{ number_format($user->points) }} Poin EcoTrack</span>
+            <span>{{ number_format($user->points) }} EcoTrack Points</span>
         </div>
         <div class="action-buttons">
             <a href="{{ route('reports.create') }}" class="btn btn-action btn-primary-action">
                 <i class="fas fa-exclamation-triangle me-2"></i>
-                Lapor Masalah Lingkungan
+                Report Environmental Issue
             </a>
             <a href="{{ route('challenges.index') }}" class="btn btn-action btn-secondary-action">
                 <i class="fas fa-trophy me-2"></i>
-                Lihat Tantangan
+                View Challenges
             </a>
         </div>
     </div>
@@ -480,28 +480,28 @@
             <i class="fas fa-file-alt"></i>
         </div>
         <div class="stat-number">{{ $myReports->count() }}</div>
-        <div class="stat-label">Total Laporan</div>
+        <div class="stat-label">Total Reports</div>
     </div>
     <div class="stat-card">
         <div class="stat-icon challenges">
             <i class="fas fa-trophy"></i>
         </div>
         <div class="stat-number">{{ $activeChallenges->count() }}</div>
-        <div class="stat-label">Tantangan Aktif</div>
+        <div class="stat-label">Active Challenges</div>
     </div>
     <div class="stat-card">
         <div class="stat-icon points">
             <i class="fas fa-star"></i>
         </div>
         <div class="stat-number">{{ number_format($user->points) }}</div>
-        <div class="stat-label">Total Poin</div>
+        <div class="stat-label">Total Points</div>
     </div>
     <div class="stat-card">
         <div class="stat-icon rank">
             <i class="fas fa-medal"></i>
         </div>
         <div class="stat-number">#{{ rand(1, 100) }}</div>
-        <div class="stat-label">Peringkat</div>
+        <div class="stat-label">Community Rank</div>
     </div>
 </div>
 
@@ -514,10 +514,10 @@
                 <div class="section-icon reports">
                     <i class="fas fa-file-alt"></i>
                 </div>
-                Laporan Terakhir
+                Recent Reports
             </h3>
             <a href="{{ route('reports.index') }}" class="view-all-btn">
-                Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
+                View All <i class="fas fa-arrow-right ms-1"></i>
             </a>
         </div>
 
@@ -547,11 +547,11 @@
             <div class="empty-icon">
                 <i class="fas fa-file-alt"></i>
             </div>
-            <h4 class="empty-title">Belum Ada Laporan</h4>
-            <p class="empty-text">Mulai berkontribusi dengan membuat laporan masalah lingkungan pertama Anda.</p>
+            <h4 class="empty-title">No Reports Yet</h4>
+            <p class="empty-text">Start contributing by creating your first environmental incident report.</p>
             <a href="{{ route('reports.create') }}" class="btn btn-detail mt-2">
                 <i class="fas fa-plus me-1"></i>
-                Buat Laporan
+                Submit Report
             </a>
         </div>
         @endforelse
@@ -564,10 +564,10 @@
                 <div class="section-icon challenges">
                     <i class="fas fa-trophy"></i>
                 </div>
-                Tantangan Aktif
+                Active Challenges
             </h3>
             <a href="{{ route('challenges.index') }}" class="view-all-btn">
-                Lihat Semua <i class="fas fa-arrow-right ms-1"></i>
+                View All <i class="fas fa-arrow-right ms-1"></i>
             </a>
         </div>
 
@@ -582,19 +582,19 @@
             <div class="card-body-modern">
                 <div class="challenge-reward">
                     <i class="fas fa-coins"></i>
-                    {{ number_format($challenge->point_reward) }} Poin
+                    {{ number_format($challenge->point_reward) }} Points
                 </div>
                 <p class="card-text-modern">
-                    {{ Str::limit($challenge->description ?? 'Ikuti tantangan ini untuk mendapatkan poin dan berkontribusi pada lingkungan.', 100) }}
+                    {{ Str::limit($challenge->description ?? 'Join this challenge to earn points and protect the environment.', 100) }}
                 </p>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('challenges.show', $challenge) }}" class="btn-detail">
                         <i class="fas fa-eye me-1"></i>
-                        Lihat Detail
+                        View Details
                     </a>
                     <small class="text-muted">
                         <i class="fas fa-users me-1"></i>
-                        {{ rand(10, 100) }} peserta
+                        {{ rand(10, 100) }} participants
                     </small>
                 </div>
             </div>
@@ -604,11 +604,11 @@
             <div class="empty-icon">
                 <i class="fas fa-trophy"></i>
             </div>
-            <h4 class="empty-title">Tidak Ada Tantangan</h4>
-            <p class="empty-text">Saat ini tidak ada tantangan aktif. Pantau terus untuk tantangan baru!</p>
+            <h4 class="empty-title">No Active Challenges</h4>
+            <p class="empty-text">There are currently no active challenges. Check back soon for new challenges!</p>
             <a href="{{ route('challenges.index') }}" class="btn btn-detail mt-2">
                 <i class="fas fa-search me-1"></i>
-                Cari Tantangan
+                Explore Challenges
             </a>
         </div>
         @endforelse
@@ -622,7 +622,7 @@
             <div class="card-header-modern">
                 <h5 class="card-title-modern">
                     <i class="fas fa-bolt text-warning"></i>
-                    Aksi Cepat
+                    Quick Actions
                 </h5>
             </div>
             <div class="card-body-modern">
@@ -631,28 +631,28 @@
                         <a href="{{ route('reports.create') }}"
                             class="btn btn-outline-danger w-100 h-100 d-flex flex-column align-items-center justify-content-center p-3">
                             <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
-                            <span class="fw-semibold">Lapor Masalah</span>
+                            <span class="fw-semibold">Report Issue</span>
                         </a>
                     </div>
                     <div class="col-md-3 col-6">
                         <a href="{{ route('green-map.index') }}"
                             class="btn btn-outline-success w-100 h-100 d-flex flex-column align-items-center justify-content-center p-3">
                             <i class="fas fa-map fa-2x mb-2"></i>
-                            <span class="fw-semibold">Peta Hijau</span>
+                            <span class="fw-semibold">Green Map</span>
                         </a>
                     </div>
                     <div class="col-md-3 col-6">
                         <a href="{{ route('challenges.index') }}"
                             class="btn btn-outline-warning w-100 h-100 d-flex flex-column align-items-center justify-content-center p-3">
                             <i class="fas fa-trophy fa-2x mb-2"></i>
-                            <span class="fw-semibold">Tantangan</span>
+                            <span class="fw-semibold">Challenges</span>
                         </a>
                     </div>
                     <div class="col-md-3 col-6">
                         <a href="{{ route('reports.index') }}"
                             class="btn btn-outline-info w-100 h-100 d-flex flex-column align-items-center justify-content-center p-3">
                             <i class="fas fa-chart-line fa-2x mb-2"></i>
-                            <span class="fw-semibold">Statistik</span>
+                            <span class="fw-semibold">Statistics</span>
                         </a>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Titik Hijau Baru - EcoTrack.ID')
+@section('title', 'Add New Green Spot - EcoTrack.ID')
 
 @section('content')
 <style>
@@ -25,12 +25,9 @@
 }
 
 @keyframes float {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateX(0) translateY(0);
     }
-
     50% {
         transform: translateX(-25px) translateY(-25px);
     }
@@ -488,26 +485,26 @@ textarea.form-control-modern {
 <div class="create-hero">
     <div class="hero-content">
         <div class="hero-badge">
-            🌱 Kontribusi Komunitas
+            🌱 Community Contribution
         </div>
-        <h1 class="hero-title">Tambah Titik Hijau Baru</h1>
+        <h1 class="hero-title">Add New Green Spot</h1>
         <p class="hero-subtitle">
-            Bantu komunitas dengan menambahkan lokasi ramah lingkungan yang Anda ketahui.
-            Setiap kontribusi Anda akan membantu orang lain menemukan tempat-tempat hijau di sekitar mereka.
+            Help the community by sharing eco-friendly locations you know.
+            Every contribution helps others discover green places around them.
         </p>
 
         <div class="hero-steps">
             <div class="step-item">
                 <div class="step-number">1</div>
-                <span>Pilih lokasi di peta</span>
+                <span>Select location on map</span>
             </div>
             <div class="step-item">
                 <div class="step-number">2</div>
-                <span>Isi informasi detail</span>
+                <span>Fill in details</span>
             </div>
             <div class="step-item">
                 <div class="step-number">3</div>
-                <span>Submit kontribusi</span>
+                <span>Submit contribution</span>
             </div>
         </div>
     </div>
@@ -518,16 +515,16 @@ textarea.form-control-modern {
     <div class="map-header">
         <h2 class="map-title">
             <i class="fas fa-map"></i>
-            Pilih Lokasi di Peta
+            Select Location on Map
         </h2>
         <div class="map-controls">
             <button class="btn-map" id="locateBtn">
                 <i class="fas fa-crosshairs"></i>
-                Lokasi Saya
+                My Location
             </button>
             <button class="btn-map" id="clearBtn">
                 <i class="fas fa-times"></i>
-                Hapus Marker
+                Remove Marker
             </button>
         </div>
     </div>
@@ -538,16 +535,16 @@ textarea.form-control-modern {
         <div class="map-instructions">
             <div class="instructions-title">
                 <i class="fas fa-info-circle"></i>
-                Cara Menggunakan
+                How to Use
             </div>
-            <p>• Klik pada peta untuk menandai lokasi<br>
-                • Atau gunakan tombol "Lokasi Saya"<br>
-                • Koordinat akan terisi otomatis</p>
+            <p>• Click on the map to mark a location<br>
+                • Or use the "My Location" button<br>
+                • Coordinates will be populated automatically</p>
         </div>
 
         <div class="coordinates-display" id="coordsDisplay" style="display: none;">
-            <div class="coords-title">Koordinat Terpilih:</div>
-            <div class="coords-value" id="displayCoords">Belum dipilih</div>
+            <div class="coords-title">Selected Coordinates:</div>
+            <div class="coords-value" id="displayCoords">None selected</div>
         </div>
     </div>
 </div>
@@ -558,7 +555,7 @@ textarea.form-control-modern {
         <div class="title-icon">
             <i class="fas fa-edit"></i>
         </div>
-        Informasi Detail Lokasi
+        Location Details
     </h2>
 
     <form action="{{ route('green-map.store') }}" method="POST" id="greenPointForm">
@@ -570,21 +567,19 @@ textarea.form-control-modern {
                 <div class="label-icon">
                     <i class="fas fa-tag"></i>
                 </div>
-                Tipe Titik Hijau
+                Green Spot Type
             </label>
             <select name="type" id="type" class="form-select-modern" required>
-                <option value="">Pilih tipe lokasi...</option>
-                <option value="Bank Sampah" {{ old('type') == 'Bank Sampah' ? 'selected' : '' }}>🗑 Bank Sampah</option>
-                <option value="Taman" {{ old('type') == 'Taman' ? 'selected' : '' }}>🌳 Taman Hijau</option>
-                <option value="Tempat Daur Ulang" {{ old('type') == 'Tempat Daur Ulang' ? 'selected' : '' }}>♻ Tempat
-                    Daur Ulang</option>
-                <option value="Komunitas Hijau" {{ old('type') == 'Komunitas Hijau' ? 'selected' : '' }}>👥 Komunitas
-                    Hijau</option>
-                <option value="Lainnya" {{ old('type') == 'Lainnya' ? 'selected' : '' }}>📍 Lainnya</option>
+                <option value="">Select location type...</option>
+                <option value="Waste Bank" {{ old('type') == 'Waste Bank' || old('type') == 'Bank Sampah' ? 'selected' : '' }}>🗑 Waste Bank</option>
+                <option value="Taman" {{ old('type') == 'Taman' ? 'selected' : '' }}>🌳 Green Park</option>
+                <option value="Tempat Daur Ulang" {{ old('type') == 'Tempat Daur Ulang' ? 'selected' : '' }}>♻ Recycling Center</option>
+                <option value="Komunitas Hijau" {{ old('type') == 'Komunitas Hijau' ? 'selected' : '' }}>👥 Green Community</option>
+                <option value="Lainnya" {{ old('type') == 'Lainnya' ? 'selected' : '' }}>📍 Other</option>
             </select>
             <div class="validation-success" id="typeSuccess" style="display: none;">
                 <i class="fas fa-check"></i>
-                <span>Tipe sudah dipilih</span>
+                <span>Type selected</span>
             </div>
         </div>
 
@@ -594,13 +589,13 @@ textarea.form-control-modern {
                 <div class="label-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
-                Nama Lokasi
+                Location Name
             </label>
             <input type="text" name="name" id="name" class="form-control-modern" value="{{ old('name') }}"
-                placeholder="Contoh: Bank Sampah Hijau Lestari" required>
+                placeholder="e.g., Green Earth Recycling Center" required>
             <div class="validation-message validation-success" id="nameSuccess" style="display: none;">
                 <i class="fas fa-check"></i>
-                <span>Nama lokasi sudah sesuai</span>
+                <span>Location name looks good</span>
             </div>
         </div>
 
@@ -610,14 +605,14 @@ textarea.form-control-modern {
                 <div class="label-icon">
                     <i class="fas fa-align-left"></i>
                 </div>
-                Deskripsi Singkat
+                Short Description
             </label>
             <textarea name="description" id="description" rows="4" class="form-control-modern"
-                placeholder="Jelaskan secara singkat tentang lokasi ini, fasilitas yang tersedia, jam operasional, dll."
+                placeholder="Briefly describe this location, facilities, opening hours, accepted items, etc."
                 required>{{ old('description') }}</textarea>
             <div class="validation-message validation-success" id="descSuccess" style="display: none;">
                 <i class="fas fa-check"></i>
-                <span>Deskripsi sudah memadai</span>
+                <span>Description looks good</span>
             </div>
         </div>
 
@@ -627,7 +622,7 @@ textarea.form-control-modern {
                 <div class="label-icon">
                     <i class="fas fa-crosshairs"></i>
                 </div>
-                Koordinat Lokasi
+                Coordinates
             </label>
             <div class="coordinate-row">
                 <div class="coordinate-input">
@@ -643,13 +638,13 @@ textarea.form-control-modern {
             </div>
             <div class="validation-message validation-error" id="coordsError" style="display: none;">
                 <i class="fas fa-exclamation-triangle"></i>
-                <span>Silakan pilih lokasi di peta terlebih dahulu</span>
+                <span>Please select a location on the map first</span>
             </div>
         </div>
 
         <button type="submit" class="btn-submit" id="submitBtn" disabled>
             <i class="fas fa-plus-circle"></i>
-            <span id="submitText">Pilih Lokasi di Peta Terlebih Dahulu</span>
+            <span id="submitText">Select Location on Map First</span>
         </button>
     </form>
 </div>
@@ -718,7 +713,7 @@ function initializeMap() {
 
     function onLocationError(e) {
         console.log('Location error:', e.message);
-        alert('Tidak dapat mendeteksi lokasi Anda. Silakan klik pada peta untuk memilih lokasi.');
+        alert('Unable to detect your location. Please click on the map to choose a location.');
     }
 
     // Map events
@@ -733,7 +728,7 @@ function initializeMap() {
     // Control buttons
     document.getElementById('locateBtn').addEventListener('click', function() {
         var btn = this;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencari...';
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Locating...';
         btn.classList.add('active');
 
         map.locate({
@@ -744,7 +739,7 @@ function initializeMap() {
         });
 
         setTimeout(function() {
-            btn.innerHTML = '<i class="fas fa-crosshairs"></i> Lokasi Saya';
+            btn.innerHTML = '<i class="fas fa-crosshairs"></i> My Location';
             btn.classList.remove('active');
         }, 3000);
     });
@@ -813,22 +808,20 @@ function initializeForm() {
         validateForm();
     });
 
-    // Form submission - SIMPLIFIED
+    // Form submission
     const form = document.getElementById('greenPointForm');
     form.addEventListener('submit', function(e) {
-        // Don't prevent default - let form submit normally
         if (!validateForm()) {
             e.preventDefault();
-            alert('Mohon lengkapi semua field yang diperlukan');
+            alert('Please complete all required fields.');
             return false;
         }
 
         // Show loading state
         const submitBtn = document.getElementById('submitBtn');
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menambahkan Titik Hijau...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding Green Spot...';
 
-        // Let form submit naturally
         return true;
     });
 }
@@ -856,13 +849,13 @@ function validateForm() {
     submitBtn.disabled = !isValid;
 
     if (isValid) {
-        submitText.textContent = 'Tambahkan Titik Hijau';
+        submitText.textContent = 'Add Green Spot';
         submitBtn.innerHTML = '<i class="fas fa-plus-circle"></i> ' + submitText.textContent;
     } else if (!hasCoordinates) {
-        submitText.textContent = 'Pilih Lokasi di Peta Terlebih Dahulu';
+        submitText.textContent = 'Select Location on Map First';
         submitBtn.innerHTML = '<i class="fas fa-map-marker-alt"></i> ' + submitText.textContent;
     } else {
-        submitText.textContent = 'Lengkapi Semua Field';
+        submitText.textContent = 'Complete All Fields';
         submitBtn.innerHTML = '<i class="fas fa-edit"></i> ' + submitText.textContent;
     }
 

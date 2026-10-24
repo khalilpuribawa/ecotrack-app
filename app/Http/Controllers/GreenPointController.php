@@ -42,6 +42,6 @@ class GreenPointController extends Controller
             // 'verified' defaultnya false, butuh persetujuan admin
         ]);
 
-        return redirect()->route('green-map.index')->with('success', 'Titik hijau berhasil ditambahkan dan menunggu verifikasi.');
+        return redirect()->route('green-map.index')->with('success', 'Green spot added successfully and is pending verification.');
     }
 }

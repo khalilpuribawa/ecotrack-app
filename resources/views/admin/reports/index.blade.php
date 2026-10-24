@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Manajemen Laporan - Admin EcoTrack.ID')
+@section('title', 'Report Management - Admin EcoTrack.ID')
 
 @section('content')
 <style>
@@ -488,9 +488,9 @@
             <div class="title-icon">
                 <i class="fas fa-clipboard-list"></i>
             </div>
-            Manajemen Laporan
+            Report Management
         </h1>
-        <p class="admin-subtitle">Kelola dan pantau semua laporan masalah lingkungan dari pengguna</p>
+        <p class="admin-subtitle">Manage and review all environmental incident reports submitted by citizens</p>
     </div>
 </div>
 
@@ -498,19 +498,19 @@
 <div class="stats-grid">
     <div class="stat-card total">
         <div class="stat-number">{{ $reports->total() }}</div>
-        <div class="stat-label">Total Laporan</div>
+        <div class="stat-label">Total Reports</div>
     </div>
     <div class="stat-card pending">
         <div class="stat-number">{{ $reports->where('status', 'pending')->count() }}</div>
-        <div class="stat-label">Menunggu Review</div>
+        <div class="stat-label">Pending Review</div>
     </div>
     <div class="stat-card verified">
         <div class="stat-number">{{ $reports->where('status', 'verified')->count() }}</div>
-        <div class="stat-label">Terverifikasi</div>
+        <div class="stat-label">Verified</div>
     </div>
     <div class="stat-card resolved">
         <div class="stat-number">{{ $reports->where('status', 'resolved')->count() }}</div>
-        <div class="stat-label">Selesai</div>
+        <div class="stat-label">Resolved</div>
     </div>
 </div>
 
@@ -518,13 +518,13 @@
 <div class="filter-container">
     <div class="filter-title">
         <i class="fas fa-filter"></i>
-        Filter Status Laporan
+        Filter by Status
     </div>
     <div class="filter-buttons">
         <a href="{{ route('admin.reports.index') }}"
             class="filter-btn btn-secondary {{ !request('status') ? 'active' : '' }}">
             <i class="fas fa-list me-2"></i>
-            Semua Laporan
+            All Reports
         </a>
         <a href="{{ route('admin.reports.index', ['status' => 'pending']) }}"
             class="filter-btn btn-warning {{ request('status') == 'pending' ? 'active' : '' }}">
@@ -549,7 +549,7 @@
     <div class="table-header">
         <h3 class="table-title">
             <i class="fas fa-table"></i>
-            Daftar Laporan
+            Incident Reports List
             @if(request('status'))
             <span class="badge bg-primary ms-2">{{ ucfirst(request('status')) }}</span>
             @endif
@@ -561,11 +561,11 @@
             <thead>
                 <tr>
                     <th><i class="fas fa-hashtag me-1"></i> ID</th>
-                    <th><i class="fas fa-tag me-1"></i> Kategori</th>
-                    <th><i class="fas fa-user me-1"></i> Pelapor</th>
+                    <th><i class="fas fa-tag me-1"></i> Category</th>
+                    <th><i class="fas fa-user me-1"></i> Reporter</th>
                     <th><i class="fas fa-info-circle me-1"></i> Status</th>
-                    <th><i class="fas fa-calendar me-1"></i> Tanggal</th>
-                    <th><i class="fas fa-cogs me-1"></i> Aksi</th>
+                    <th><i class="fas fa-calendar me-1"></i> Date</th>
+                    <th><i class="fas fa-cogs me-1"></i> Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -603,14 +603,14 @@
                         <div class="dropdown action-dropdown">
                             <button class="btn action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-ellipsis-v"></i>
-                                Aksi
+                                Action
                             </button>
                             <ul class="dropdown-menu dropdown-menu-modern dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item dropdown-item-modern"
                                         href="{{ route('admin.reports.show', $report) }}" target="_blank">
                                         <i class="fas fa-eye"></i>
-                                        Lihat Detail
+                                        View Details
                                     </a>
                                 </li>
 
@@ -622,7 +622,7 @@
                                         <input type="hidden" name="status" value="verified">
                                         <button type="submit" class="dropdown-item dropdown-item-modern">
                                             <i class="fas fa-check-circle text-info"></i>
-                                            Verifikasi
+                                            Verify Report
                                         </button>
                                     </form>
                                 </li>
@@ -636,7 +636,7 @@
                                         <input type="hidden" name="status" value="resolved">
                                         <button type="submit" class="dropdown-item dropdown-item-modern">
                                             <i class="fas fa-check-double text-success"></i>
-                                            Tandai Selesai
+                                            Mark as Resolved
                                         </button>
                                     </form>
                                 </li>
@@ -647,12 +647,12 @@
                                 </li>
                                 <li>
                                     <form action="{{ route('admin.reports.destroy', $report) }}" method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus laporan ini?');">
+                                        onsubmit="return confirm('Are you sure you want to delete this report?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="dropdown-item dropdown-item-modern text-danger">
                                             <i class="fas fa-trash"></i>
-                                            Hapus
+                                            Delete
                                         </button>
                                     </form>
                                 </li>
@@ -667,10 +667,10 @@
                             <div class="empty-icon">
                                 <i class="fas fa-inbox"></i>
                             </div>
-                            <h4 class="empty-title">Tidak Ada Laporan</h4>
+                            <h4 class="empty-title">No Reports Found</h4>
                             <p class="empty-text">
-                                Belum ada laporan yang sesuai dengan filter yang dipilih.
-                                Coba ubah filter atau tunggu laporan baru dari pengguna.
+                                No incident reports match the selected criteria.
+                                Try changing your filters or check back later.
                             </p>
                         </div>
                     </td>
@@ -694,10 +694,9 @@ document.querySelectorAll('form[action*="updateStatus"]').forEach(form => {
         const button = this.querySelector('button');
         const originalText = button.innerHTML;
 
-        button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+        button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
         button.disabled = true;
 
-        // Re-enable after 3 seconds if form doesn't submit
         setTimeout(() => {
             button.innerHTML = originalText;
             button.disabled = false;
@@ -705,28 +704,13 @@ document.querySelectorAll('form[action*="updateStatus"]').forEach(form => {
     });
 });
 
-// Add confirmation for status changes
-document.querySelectorAll('form[action*="updateStatus"] button').forEach(button => {
-    button.addEventListener('click', function(e) {
-        const action = this.textContent.trim();
-        if (!confirm(Yakin ingin $ {
-                    action.toLowerCase()
-                }
-                laporan ini ? )) {
-            e.preventDefault();
-        }
-    });
-});
-
 // Auto-refresh every 30 seconds for real-time updates
 setInterval(() => {
     if (document.visibilityState === 'visible') {
-        // Only refresh if page is visible
         const currentUrl = new URL(window.location);
         fetch(currentUrl.href)
             .then(response => response.text())
             .then(html => {
-                // Update only the stats cards
                 const parser = new DOMParser();
                 const newDoc = parser.parseFromString(html, 'text/html');
                 const newStats = newDoc.querySelector('.stats-grid');
